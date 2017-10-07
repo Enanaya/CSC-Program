@@ -10,6 +10,7 @@ public class CalenderTest {
 	public static void main(String[] args) {
 		Calendar c=new GregorianCalendar();
 		DateFormat format=new SimpleDateFormat("yyyy-mm-dd");
+		
 		try {
 			c.setTime(format.parse("2030-5-10") );//将字符串解析成date
 			c.set(Calendar.DATE, 1);		//设定日期
