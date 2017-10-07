@@ -6,7 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+//模拟日历，未完成
 public class CalenderTest {
+	
 	public static void main(String[] args) {
 		Calendar c=new GregorianCalendar();
 		DateFormat format=new SimpleDateFormat("yyyy-mm-dd");
