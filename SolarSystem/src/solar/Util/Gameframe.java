@@ -16,7 +16,7 @@ public class Gameframe extends Frame {
 		setLocation(100, 100);
 		setVisible(true);
 
-		// new PaintThread().start();
+		new PaintThread().start();
 
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -28,7 +28,6 @@ public class Gameframe extends Frame {
  * 定义一个重画窗口的线程，内部类
  */
 	class PaintThread extends Thread{
-		
 		public void run() {
 			while (true) {
 				repaint();

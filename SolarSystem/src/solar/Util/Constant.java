@@ -6,6 +6,6 @@ package solar.Util;
  */
 
 public class Constant {
-	public static final int Game_Width = 500;
-	public static final int Game_Heigth = 500;
+	public static final int Game_Width = 900;
+	public static final int Game_Heigth = 700;
 }
