@@ -1,12 +1,14 @@
-package solar.Util;
+package util;
 
 import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
-public class Gameframe extends Frame {
+public class Myframe extends Frame {
 
 	/**
 	 * load window
@@ -24,6 +26,20 @@ public class Gameframe extends Frame {
 			}
 		});
 	}
+	
+	private Image offScreenImage = null;
+    @Override
+    public void update(Graphics g) {
+        if(offScreenImage == null) {
+            offScreenImage = this.createImage(Constant.Game_Width,
+            		Constant.Game_Heigth);
+        }
+        Graphics gOff = offScreenImage.getGraphics();
+        paint(gOff);
+        g.drawImage(offScreenImage, 0, 0, null);
+    }
+	
+	
 /**
  * creat a thread to repaint the window,put it in inner class
  * 定义一个重画窗口的线程，内部类

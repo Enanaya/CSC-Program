@@ -1,4 +1,4 @@
-package solar.Util;
+package util;
 
 /**
  * @author 76500
