@@ -6,8 +6,6 @@ import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JFrame;
-
 public class Myframe extends Frame {
 
 	/**
