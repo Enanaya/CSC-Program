@@ -20,10 +20,10 @@ public class Bullet {
 		
 		x+=speed*Math.cos(degree);
 		y+=speed*Math.sin(degree);
-		if (y>Constant.Game_Heigth-height || y<height ) {
+		if (y>Constant.Game_Heigth-height-30 || y<height+30 ) {
 			degree=-degree;
 		}
-		if (x>Constant.Game_Width-width || x<width ) {
+		if (x>Constant.Game_Width-width-30 || x<width+30 ) {
 			degree=Math.PI-degree;
 		}
 		
