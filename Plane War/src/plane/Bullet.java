@@ -2,6 +2,7 @@ package plane;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import util.Constant;
 
@@ -30,6 +31,12 @@ public class Bullet {
 		
 		g.setColor(color);
 	}
+	
+	public Rectangle getRect() {
+		Rectangle r=new Rectangle((int)x, (int)y, width,height);
+		return r;
+	}
+	
 	
 	public Bullet() {
 		// TODO Auto-generated constructor stub
