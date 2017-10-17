@@ -26,5 +26,9 @@ public class MyFrame extends Gameframe  {
 		Planet planet1=new Planet(30,Color.BLUE,100,50,0.1,sun,1);
 		planet1.draw(g);
 //		repaint();
+		super.paint(g);
+		Circle circle=new Circle(100, 450, 350);
+		circle.draw(g);
 	}
+	
 }
