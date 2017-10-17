@@ -17,7 +17,8 @@ public class MyFrame extends Gameframe {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		Circle circle=new Circle(100, 100, 100);
+		Circle circle=new Circle(100, 450, 350);
 		circle.draw(g);
 	}
+	
 }

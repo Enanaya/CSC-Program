@@ -5,7 +5,19 @@ import java.util.ArrayList;
 
 public class Climber {
 
-	public String name;
+	private int age;
+	private String gender;
+	private ArrayList<Mountain> Mountains;
+	private int id;
+	private String name;
+	
+	
+	public int getId() { 
+		return id;
+	}
+//	public void setId(int id) {
+//		this.id = id;
+//	}
 	public String getName() {
 		return name;
 	}
@@ -30,10 +42,6 @@ public class Climber {
 	public void setMountains(ArrayList<Mountain> mountains) {
 		this.Mountains = mountains;
 	}
-	public int age;
-	public String gender;
-	
-	public ArrayList<Mountain> Mountains;
 	
 	public Climber(String name, int age, String gender, ArrayList mountains) {
 //		super();

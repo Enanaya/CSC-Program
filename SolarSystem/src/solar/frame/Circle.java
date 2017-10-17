@@ -7,7 +7,7 @@ public class Circle extends MyFrame{
 	
 	private int r,x,y;
 	
-	public Circle(int r,int x,int y) {
+	public Circle(int r,int x,int y) { 
 		this.r=r;
 		this.x=x;
 		this.y=y;
