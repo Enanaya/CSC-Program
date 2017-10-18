@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class MapExample {
+public class MapExample { //遍历map的四种方法
     public static void main(String[] args) {
         Map<Integer, String> map = new HashMap<Integer, String>();
         map.put(1, "a");

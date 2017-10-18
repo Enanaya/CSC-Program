@@ -8,13 +8,18 @@ public class Climber {
 	private int age;
 	private String gender;
 	private ArrayList<Mountain> Mountains;
-	private int id;
+	//private int id=1;
 	private String name;
+	private ArrayList<Climber_Mountain> climbing_info;
 	
 	
-	public int getId() { 
-		return id;
+ 	public ArrayList<Climber_Mountain> getClimbing_info() {
+		return climbing_info;
 	}
+	
+//	public int getId() { 
+//		return id;
+//	}
 //	public void setId(int id) {
 //		this.id = id;
 //	}
@@ -24,6 +29,7 @@ public class Climber {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public int getAge() {
 		return age;
 	}
