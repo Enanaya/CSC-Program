@@ -8,11 +8,9 @@ public class Example_G {
 
 	ArrayList<Climber_Mountain> cm_example;
 
-	
-
 	public Example_G() {
 		// TODO Auto-generated constructor stub
-		cm_example = new ArrayList<Climber_Mountain>() ;
+		cm_example = new ArrayList<Climber_Mountain>() ;  // create climber_mountain example
 		
 		cm_example.add(new Climber_Mountain(01, "Mike", "A", 1892));
 		cm_example.add(new Climber_Mountain(02, "John", "B", 528));

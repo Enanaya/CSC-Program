@@ -1,6 +1,5 @@
 package member;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,9 +13,15 @@ public class ClubStats extends method { // main class to call all things
 
 		Example_G cm_example = new Example_G();
 		ArrayList<Climber_Mountain> cm = cm_example.getcm();
+		ArrayList<Climber> climbers=new ArrayList<Climber>();
+		
+		
 		int id = 1;
 
 		while (true) {
+			
+			
+
 			System.out.println("please input number to choose");
 			System.out.println("1.add a new climber ");
 			System.out.println("2.add a mountain to the record for a given climber");
@@ -38,7 +43,7 @@ public class ClubStats extends method { // main class to call all things
 				} else {
 					cm.add(addRecord(id++, C_name, M_name, height));
 				}
-				System.out.println(cm.size());
+//				System.out.println(cm.size());
 				break;
 			case "2":
 

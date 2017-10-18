@@ -8,7 +8,9 @@ import member.Climber_Mountain;
 public class method {
 
 	public void printeduser(ArrayList<Climber> climbers) {
-
+		for (Climber climber : climbers) {
+			System.out.println(climber.getName());
+		}
 	}
 
 	public static Climber_Mountain addRecord(int id, String Climber_name, 
