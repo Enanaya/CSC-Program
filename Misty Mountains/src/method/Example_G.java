@@ -26,7 +26,7 @@ public class Example_G {
 		climbers.add(new Climber("John", 16, "Male"));
 		climbers.add(new Climber("Andy", 30, "Female"));
 		
-		mountains=new ArrayList<>(mountains);
+		mountains=new ArrayList<Mountain>();
 		mountains.add(new Mountain("A",3000));
 		mountains.add(new Mountain("B",2000));
 		mountains.add(new Mountain("C",4000));

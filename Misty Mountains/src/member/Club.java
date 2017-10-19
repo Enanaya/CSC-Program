@@ -6,6 +6,8 @@ public class Club {
 
 	private ArrayList<Climber> climbers;
 	private Mountain highest_mountain;
+	private ArrayList<Climber_Mountain> cm ;
+	
 	private String name;
 //	ArrayList<Climber_Mountain> pointed_mountains;
 
@@ -17,6 +19,16 @@ public class Club {
 		this.climbers = climbers;
 	}
 
+	public ArrayList<Climber_Mountain> getCm() {
+		return cm;
+	}
+
+	public void setCm() {
+		for (Climber climber : climbers) {
+			cm.addAll(climber.getClimbing_info());
+		}
+	}
+	
 	public Club(String name) {
 		// TODO Auto-generated constructor stub
 		this.name=name;
@@ -56,5 +68,8 @@ public class Club {
 		
 		return pointed_mountains;
 	}
+
+	
+
 
 }
