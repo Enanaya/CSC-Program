@@ -38,6 +38,9 @@ public class Climber_Mountain {
 		setMountain_name(mountain_name);
 		setCurrent_height(current_height);
 	}
+	public Climber_Mountain() {
+	}
+	
 	
 	
 }

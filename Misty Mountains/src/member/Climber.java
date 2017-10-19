@@ -1,6 +1,5 @@
 package member;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 public class Climber {
@@ -12,17 +11,25 @@ public class Climber {
 	private String name;
 	private ArrayList<Climber_Mountain> climbing_info;
 	
-	
  	public ArrayList<Climber_Mountain> getClimbing_info() {
 		return climbing_info;
 	}
 	
+ 	public void update_cm(ArrayList<Climber_Mountain> cm) {
+		for (Climber_Mountain climber_mountain : cm) {
+			if (climber_mountain.getClimber_name()==this.name) {
+				climbing_info.add(climber_mountain);
+			}
+		}
+	}
+ 	
 //	public int getId() { 
 //		return id;
 //	}
 //	public void setId(int id) {
 //		this.id = id;
 //	}
+ 	
 	public String getName() {
 		return name;
 	}
@@ -49,31 +56,34 @@ public class Climber {
 		this.Mountains = mountains;
 	}
 	
-	public Climber(String name, int age, String gender, ArrayList mountains) {
+	public Climber(String name, int age, String gender ) {
 //		super();
 		setName(name);
 		setAge(age);
 		setGender(gender);
-		setMountains(mountains);
 	}
 	
-	public Mountain gethighset(ArrayList<Mountain> mountains) {
-		Mountain highest_mountain=mountains.get(0);
-		for (Mountain mountain2 : mountains) {
-			if (mountain2.getHeight()>highest_mountain.getHeight()) {
-				highest_mountain=mountain2;
+	public Climber_Mountain gethighset(ArrayList<Climber_Mountain> climbing_infos) {
+		
+		int max_index=0;int top_height=0;
+		
+		for (int i = 0; i < climbing_infos.size(); i++) {
+			if (climbing_infos.get(i).getCurrent_height()>top_height) {
+				top_height=climbing_infos.get(i).getCurrent_height();
+				max_index=i;
 			}
 		}
-		return highest_mountain;
+		
+		return climbing_infos.get(max_index);
 	}
 
 	
-	public int average(ArrayList<Mountain> mountains) {
+	public int average() {
 		int total = 0;
-		for (Mountain mountain : mountains) {
-			total+=mountain.getHeight();
+		for (Climber_Mountain info : climbing_info) {
+			total+=info.getCurrent_height();
 		}
-		return total/mountains.size();
+		return total/climbing_info.size();
 	}
 
 	
