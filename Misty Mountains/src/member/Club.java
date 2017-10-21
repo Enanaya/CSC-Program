@@ -6,10 +6,10 @@ public class Club {
 
 	private ArrayList<Climber> climbers;
 	private Mountain highest_mountain;
-	private ArrayList<Climber_Mountain> cm ;
-	
+	private ArrayList<Climber_Mountain> cm=new ArrayList<Climber_Mountain>();
+
 	private String name;
-//	ArrayList<Climber_Mountain> pointed_mountains;
+	// ArrayList<Climber_Mountain> pointed_mountains;
 
 	public ArrayList<Climber> getClimbers() {
 		return climbers;
@@ -23,18 +23,16 @@ public class Club {
 		return cm;
 	}
 
-	public void setCm() {
+	public void setCm(ArrayList<Climber> climbers) {
 		for (Climber climber : climbers) {
 			cm.addAll(climber.getClimbing_info());
 		}
 	}
-	
+
 	public Club(String name) {
-		// TODO Auto-generated constructor stub
-		this.name=name;
+		this.name = name;
 	}
-	
-	
+
 	public Climber highest_average(ArrayList<Climber> climbers) {
 		int top_height = 0;
 		int index = 0, temp = 0;
@@ -48,15 +46,21 @@ public class Club {
 		return climbers.get(index);
 	}
 
+	Climber_Mountain highest_cm;
+
 	public void getHighest_mountain() {
-		
-		
+		int max = 0;
+		for (Climber climber : climbers) {
+			if (climber.gethighset().getCurrent_height() > max) {
+				highest_cm = climber.gethighset();
+			}
+		}
 	}
 
 	public ArrayList<Climber_Mountain> getPointed_mountains(int pointed_height) {
-		
-		ArrayList<Climber_Mountain> pointed_mountains =new ArrayList<Climber_Mountain>();
-		
+
+		ArrayList<Climber_Mountain> pointed_mountains = new ArrayList<Climber_Mountain>();
+
 		for (Climber climber : climbers) {
 			for (Climber_Mountain cm : climber.getClimbing_info()) {
 				if (cm.getCurrent_height() > pointed_height) {
@@ -64,12 +68,9 @@ public class Club {
 				}
 			}
 		}
-//		this.pointed_mountains=pointed_mountains;
-		
+		// this.pointed_mountains=pointed_mountains;
+
 		return pointed_mountains;
 	}
-
-	
-
 
 }

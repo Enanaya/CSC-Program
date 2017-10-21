@@ -91,10 +91,46 @@ public class ClubStats extends method { // main class to call all things
 				//
 				// }
 				// }
+				int count=0;
 				for (Climber temp : climbers) {
 					if (temp.getName().equals(cm.get(cm.size() - 1).getClimber_name())) {
 						System.out.println("right");
 						temp.update_cm(cm.get(cm.size() - 1));
+						break;
+					}
+					count++;
+				}
+				if (count==climbers.size()) {
+					Scanner sc4=new Scanner(System.in);
+					
+					System.out.println("choose gender: 1.Female 2.Male ");
+					String new_gender = sc4.nextLine();
+					// System.out.println(gender_choose);
+					switch (new_gender) {
+					case "1":
+						gender = "Female";
+						break;
+					case "2":
+						gender = "Male";
+						break;
+					default:
+						System.out.println("meanless input,do again!");
+						continue;
+					}
+					
+					System.out.println("input age");
+					int new_age=sc4.nextInt();
+					
+					Climber new_C = new Climber(C_name,new_age,gender);
+					Mountain new_M=new Mountain(M_name, height);
+					mountains.add(new_M);
+					climbers.add(new_C);
+					for (Climber temp : climbers) {
+						if (temp.getName().equals(cm.get(cm.size() - 1).getClimber_name())) {
+							//System.out.println("right");
+							temp.update_cm(cm.get(cm.size() - 1));
+							break;
+						}
 					}
 				}
 				// System.out.println(cm.size());

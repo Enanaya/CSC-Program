@@ -10,7 +10,7 @@ public class Climber {
 	//private int id=1;
 	private String name;
 	
-	private ArrayList<Climber_Mountain> climbing_info;
+	private ArrayList<Climber_Mountain> climbing_info=new ArrayList<Climber_Mountain>();
 	
  	public ArrayList<Climber_Mountain> getClimbing_info() {
 		return climbing_info;
@@ -56,12 +56,16 @@ public class Climber {
 		setGender(gender);
 	}
 	
-	public void update_cm(ArrayList<Climber_Mountain> cm) {
+	public void create_cm(ArrayList<Climber_Mountain> cm) {
 		for (Climber_Mountain climber_mountain : cm) {
 			if (climber_mountain.getClimber_name()==this.name) {
 				climbing_info.add(climber_mountain);
 			}
 		}
+	}
+	
+	public void update_cm(Climber_Mountain cm) {
+			climbing_info.add(cm);
 	}
 	
 	public Climber_Mountain gethighset() {
@@ -88,14 +92,19 @@ public class Climber {
 	}
 
 	
-	ArrayList<Mountain> pointed_mountains=Mountains;
-	public void pointed_mountains(int pointed_height) {
+	public ArrayList<Climber_Mountain> pointed_mountains(int pointed_height) {
 	
-		for (Mountain mountain : Mountains) {
-			if (mountain.getHeight()>pointed_height) {
-				pointed_mountains.add(mountain);
+		ArrayList<Climber_Mountain> pointed_mountains=new ArrayList<Climber_Mountain>();
+		
+		for (Climber_Mountain info : climbing_info) {
+			if (info.getCurrent_height()>pointed_height) {
+				pointed_mountains.add(info);
 			}
 		}
+		return pointed_mountains;
 	}
 	
+	public Climber() {
+		// TODO Auto-generated constructor stub
+	}
 }
