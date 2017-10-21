@@ -85,6 +85,9 @@ public class Climber {
 	
 	public int average() {
 		int total = 0;
+		if (climbing_info.size()==0) {
+			return 0;
+		}
 		for (Climber_Mountain info : climbing_info) {
 			total+=info.getCurrent_height();
 		}
