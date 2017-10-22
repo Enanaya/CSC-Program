@@ -13,6 +13,10 @@ import member.Mountain;
 
 public class method {
 
+	/**
+	 * @param climbers
+	 * print all user
+	 */
 	public static void printUser(ArrayList<Climber> climbers) {
 		System.out.println("current cilmbers:");
 		System.out.println("name\tgender\tage");
@@ -21,6 +25,10 @@ public class method {
 		}
 	}
 
+	/**
+	 * @param cm
+	 * print all cm_info
+	 */
 	public static void printCM(ArrayList<Climber_Mountain> cm) {
 		System.out.println("current CM_info:");
 		System.out.println("name\tmountain\theight");
@@ -30,11 +38,22 @@ public class method {
 		}
 	}
 	
+	/**
+	 * @param id
+	 * @param Climber_name
+	 * @param Mountain_name
+	 * @param height
+	 * @return add cm_info with param
+	 */
 	public static Climber_Mountain addRecord(int id, String Climber_name, 
 			String Mountain_name, int height) {
 		return new Climber_Mountain(id, Climber_name, Mountain_name, height);
 	}
 	
+	/**
+	 * @param mylist
+	 * @return list after delete repeat elements in mylist
+	 */
 	public  static ArrayList distinct(ArrayList mylist) {
 		Set set = new HashSet();
 		ArrayList newList = new ArrayList();
@@ -48,6 +67,11 @@ public class method {
 		return mylist;
 	}
 	
+	/**
+	 * @param gender
+	 * @param climbers
+	 * add climber if can not find name while add cm_info
+	 */
 	public static void add_climber(String gender,ArrayList<Climber> climbers) {
 		Scanner sc1 = new Scanner(System.in);
 		System.out.println("input new climber's name");
@@ -63,6 +87,12 @@ public class method {
 		printUser(climbers);
 	}
 	
+	
+	/**
+	 * @param gender
+	 * @param sc1
+	 * @return gender 1.femal 2.male
+	 */
 	private static String genderChoose(String gender,Scanner sc1) {
 		while(gender==null) {
 			System.out.println("choose gender: 1.Female 2.Male ");
@@ -82,6 +112,13 @@ public class method {
 		return gender;
 	}
 	
+	/**
+	 * @param cm
+	 * @param climbers
+	 * @param mountains
+	 * @param gender
+	 * add cm_info
+	 */
 	public static void add_CM(ArrayList<Climber_Mountain> cm, ArrayList<Climber> climbers,
 			ArrayList<Mountain> mountains,String gender) {
 		Scanner sc2 = new Scanner(System.in);
@@ -108,6 +145,7 @@ public class method {
 			count++;
 		}
 		if (count==climbers.size()) {
+			System.out.println("can't not find this member,please upplementary individual belief\n");
 			Scanner sc4=new Scanner(System.in);
 			gender=genderChoose(gender, sc4);
 			

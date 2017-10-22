@@ -56,6 +56,10 @@ public class Climber {
 		setGender(gender);
 	}
 	
+	/**
+	 *load cm_info while begin the process
+	 * @param cm-list(climber_mountain)
+	 */
 	public void create_cm(ArrayList<Climber_Mountain> cm) {
 		for (Climber_Mountain climber_mountain : cm) {
 			if (climber_mountain.getClimber_name()==this.name) {
@@ -64,10 +68,17 @@ public class Climber {
 		}
 	}
 	
+	/**
+	 * update info after add record every time
+	 * @param cm-climber_mountain
+	 */
 	public void update_cm(Climber_Mountain cm) {
 			climbing_info.add(cm);
 	}
 	
+	/**
+	 * @return cm-info which have highest record
+	 */
 	public Climber_Mountain gethighset() {
 		
 		int max_index=0;int top_height=0;
@@ -83,6 +94,9 @@ public class Climber {
 	}
 
 	
+	/**
+	 * @return climber's average height
+	 */
 	public int average() {
 		int total = 0;
 		if (climbing_info.size()==0) {
@@ -95,6 +109,11 @@ public class Climber {
 	}
 
 	
+	/**
+	 * input pointed_height to get cm-list which have height more pointed_height
+	 * @param pointed_height
+	 * @return cm-list
+	 */
 	public ArrayList<Climber_Mountain> pointed_mountains(int pointed_height) {
 	
 		ArrayList<Climber_Mountain> pointed_mountains=new ArrayList<Climber_Mountain>();

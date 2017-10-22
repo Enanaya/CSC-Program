@@ -33,6 +33,10 @@ public class Club {
 		this.name = name;
 	}
 
+	/**
+	 * @param climbers all climbers
+	 * @return  climber who has highest_average
+	 */
 	public Climber highest_average(ArrayList<Climber> climbers) {
 		int top_height = 0;
 		int index = 0, temp = 0;
@@ -48,6 +52,9 @@ public class Club {
 
 	Climber_Mountain highest_cm;
 
+	/**
+	 * find the highest-cm
+	 */
 	public void getHighest_mountain() {
 		int max = 0;
 		for (Climber climber : climbers) {
@@ -57,6 +64,12 @@ public class Club {
 		}
 	}
 
+	
+	/**
+	 * input pointed_height to get cm-list which have height more pointed_height
+	 * @param pointed_height
+	 * @return cm-list
+	 */
 	public ArrayList<Climber_Mountain> getPointed_mountains(int pointed_height) {
 
 		ArrayList<Climber_Mountain> pointed_mountains = new ArrayList<Climber_Mountain>();
