@@ -54,4 +54,8 @@ public class CM_info {
 		this.current_height = current_height;
 	}
 	
+	public CM_info() {
+		// TODO Auto-generated constructor stub
+	}
+	
 }
