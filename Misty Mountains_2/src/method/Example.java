@@ -6,8 +6,6 @@ import member.CM_info;
 import member.Mountain;
 
 public class Example {
-
-	
 	
 	public static ArrayList<CM_info> getCM_infos() {
 		ArrayList<CM_info> cm_infos=new ArrayList<CM_info>();

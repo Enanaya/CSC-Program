@@ -66,7 +66,7 @@ public class Climber {
 		this.cm_infos = cm_infos;
 	}
 
-	public CM_info highest_record(ArrayList<CM_info> cm_infos) {
+	public CM_info highest_record() {
 		CM_info highest = new CM_info();
 		int max = 0;
 		for (CM_info cm_info : cm_infos) {
@@ -78,7 +78,7 @@ public class Climber {
 		return highest;
 	}
 
-	public int average(ArrayList<CM_info> cm_infos) {
+	public int average() {
 		if (cm_infos.size() == 0) {
 			return 0;
 		} else {
