@@ -74,6 +74,9 @@ public class Climber {
 		this.age = age;
 	}
 
+	/**method to find the highest height among CM_infos in this climber
+	 * @return CM_info with highest height record
+	 */
 	public CM_info highest_record() {
 		CM_info highest = new CM_info();
 		int max = 0;
@@ -86,6 +89,9 @@ public class Climber {
 		return highest;
 	}
 
+	/**method to get average height from all CM_info in this climber
+	 * @return (int)average height
+	 */
 	public int average() {
 		if (cm_infos.size() == 0) {
 			return 0;
@@ -98,6 +104,11 @@ public class Climber {
 		}
 	}
 
+	/**
+	 * input pointed_height to select the CM_info whose height is higher than pointed_height
+	 * @param point_height
+	 * @return  ArrayList<CM_info>
+	 */
 	public ArrayList<CM_info> pointed_heightCM(int point_height) {
 		ArrayList<CM_info> pointed_CMinfo=new ArrayList<CM_info>();
 		for (CM_info cm_info : cm_infos) {

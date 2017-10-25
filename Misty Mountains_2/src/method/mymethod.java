@@ -20,7 +20,7 @@ public class mymethod {
 		for (CM_info cm_info : cm_infos) {
 			String c_name=cm_info.getC_name();
 				if (!map.containsKey(c_name)) {
-					//先遍历example创建的实例有没有该climber的数据
+					//foreach example to check whether it contains data of climber whose name is c_name
 					for (Climber climber2 : climbers) {
 						if (climber2.getC_name()==c_name ) {
 							climber=climber2;
@@ -35,6 +35,45 @@ public class mymethod {
 		}
 		return map;
 	}
+	
+	
+	public static void addCM(Club club) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("input climber's name:");
+		String C_name=sc.nextLine();
+		System.out.println("input mountain's name");	
+		String M_name=sc.nextLine();
+		System.out.println("input height");
+		int height=sc.nextInt();
+		sc.nextLine();
+		Map< String, Climber> map=club.getMap();
+		CM_info cm_info=new CM_info(C_name, M_name, height);
+		boolean flag=true;
+		for (String key : map.keySet()) {
+			if (key.equals(C_name)) {
+				map.get(key).getCm_infos().add(cm_info);
+				break;
+			}
+			flag=false;
+		}
+		if (flag==false) {
+			System.out.println("can not find this climber,plz complete information");
+			String gender=null;
+			genderChoose(gender, sc);
+			System.out.println("input age:");
+			int age=sc.nextInt();
+			Climber climber = new Climber(C_name,gender,age);
+			club.getMap().put(C_name, climber);
+			for (String key : map.keySet()) {
+				if (key==C_name) {
+					map.get(key).getCm_infos().add(cm_info);
+					break;
+				}
+			}
+		}
+		
+	}
+	
 	
 	public static void add_climber(String gender,Club club) {
 		Scanner sc1 = new Scanner(System.in);

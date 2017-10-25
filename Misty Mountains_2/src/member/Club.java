@@ -36,6 +36,9 @@ public class Club {
 		return climbers;
 	}
 	
+	/** foreach all climbers to find the max average using average method in class climber 
+	 * @return (int) Max_average
+	 */
 	public Climber Max_average() {
 		Climber max=new Climber();
 		int max_average=0;
@@ -49,6 +52,9 @@ public class Club {
 	}
 	
 	
+	/**foreach all climbers to find the max height using gethighest method in class climber 
+	 * @return CM_info who has max height
+	 */
 	public CM_info getHighset()  {
 		CM_info highest_CM=new CM_info();
 		int maxHeight=0;
@@ -69,6 +75,11 @@ public class Club {
 		return highest_CM;
 	}
 	
+	
+	/**foreach all CM_infos to select whose height is higher than input height
+	 * @param height 
+	 * @return ArrayList<CM_info> height high than input height
+	 */
 	public ArrayList<CM_info> pointed_height(int height) {
 		ArrayList<CM_info> pointed_CM=new ArrayList<CM_info>();
 		for (String key : map.keySet()) {
