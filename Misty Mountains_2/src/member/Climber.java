@@ -8,8 +8,9 @@ public class Climber {
 	String C_name;
 	String gender;
 	int age;
-	ArrayList<CM_info> cm_infos;
-
+	ArrayList<CM_info> cm_infos=new ArrayList<CM_info>();
+	
+	
 	public String getC_name() {
 		return C_name;
 	}
@@ -66,6 +67,13 @@ public class Climber {
 		this.cm_infos = cm_infos;
 	}
 
+	public Climber(String c_name, String gender, int age) {
+		super();
+		C_name = c_name;
+		this.gender = gender;
+		this.age = age;
+	}
+
 	public CM_info highest_record() {
 		CM_info highest = new CM_info();
 		int max = 0;
@@ -90,7 +98,7 @@ public class Climber {
 		}
 	}
 
-	public ArrayList<CM_info> pointed_heightCM(ArrayList<CM_info> cm_infos,int point_height) {
+	public ArrayList<CM_info> pointed_heightCM(int point_height) {
 		ArrayList<CM_info> pointed_CMinfo=new ArrayList<CM_info>();
 		for (CM_info cm_info : cm_infos) {
 			if (cm_info.getCurrent_height()>=point_height) {
