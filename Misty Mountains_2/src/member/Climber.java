@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 	store data about individuals info and list of own CM_info  
+ *  have methods to set/add CM_info,get average height or pointedheight from own CM_info
+ */
 public class Climber {
 	String C_name;
 	String gender;
@@ -106,8 +110,8 @@ public class Climber {
 
 	/**
 	 * input pointed_height to select the CM_info whose height is higher than pointed_height
-	 * @param point_height
-	 * @return  ArrayList<CM_info>
+	 * @param point_height get from keyboard input
+	 * @return  return CM_infos whose height is higher than pointed_height
 	 */
 	public ArrayList<CM_info> pointed_heightCM(int point_height) {
 		ArrayList<CM_info> pointed_CMinfo=new ArrayList<CM_info>();

@@ -7,6 +7,10 @@ import java.util.Scanner;
 
 import method.mymethod;
 
+/**
+ * main method to create main menu and get info from keyboard
+ *
+ */
 public class ClubStas {
 
 	public static void main(String[] args) {

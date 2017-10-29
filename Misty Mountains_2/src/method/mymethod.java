@@ -10,10 +10,18 @@ import member.CM_info;
 import member.Climber;
 import member.Club;
 
+/**
+ * store method to get/set info
+ *
+ */
 public class mymethod {
 
 	static ArrayList<Climber> climbers=Example.getClimbers();
 	
+	/**
+	 * @param cm_infos get from example
+	 * @return use CM_infos from to initialize data
+	 */
 	public static Map<String, Climber> setCM_info(ArrayList<CM_info> cm_infos) {
 		Map<String, Climber> map=new HashMap<String,Climber>();
 		Climber climber=new Climber();
@@ -37,6 +45,10 @@ public class mymethod {
 	}
 	
 	
+	/**
+	 * @param club
+	 * send club then input CM_info to add into info where match with Climber's name
+	 */
 	public static void addCM(Club club) {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("input climber's name:");
@@ -75,6 +87,11 @@ public class mymethod {
 	}
 	
 	
+	/**
+	 * @param gender choose gender with genderchoose method
+	 * @param club
+	 * use data to add climber into club
+	 */
 	public static void add_climber(String gender,Club club) {
 		Scanner sc1 = new Scanner(System.in);
 		System.out.println("input new climber's name");
@@ -86,6 +103,10 @@ public class mymethod {
 		club.getMap().put(new_Cname, climber);
 	}
 	
+	/**
+	 * @param club
+	 * show data including highest average height and pointed height using  pointedHeight method
+	 */
 	public 	static void statistic(Club club) {
 		Climber temp=club.Max_average();
 		System.out.println(temp.getC_name()+ 
@@ -97,6 +118,10 @@ public class mymethod {
 		pointedHeight(club);
 	}
 	
+	/**
+	 * @param club
+	 * input height to return list which CM_info's current height is higher than input height
+	 */
 	public static void pointedHeight(Club club) {
 		ArrayList<CM_info> pointedCM = new ArrayList<CM_info>();
 		
@@ -114,6 +139,11 @@ public class mymethod {
 	}
 	
 	
+	/**
+	 * @param gender
+	 * @param sc1
+	 * @return gender:female or male
+	 */
 	private static String genderChoose(String gender,Scanner sc1) {
 		while(gender==null) {
 			System.out.println("choose gender: 1.Female 2.Male ");
@@ -134,6 +164,10 @@ public class mymethod {
 	}
 	
 	
+	/**
+	 * @param club
+	 * show data including CM_infos and Climbers
+	 */
 	public static void print_info(Club club) {
 		Map<String, Climber> map=club.getMap();
 		System.out.println("climber info:");

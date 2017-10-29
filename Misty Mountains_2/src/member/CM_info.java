@@ -1,5 +1,9 @@
 package member;
 
+/**
+ * store info with Climber's name,Mountain's name and current height to constitute CM_info
+ *
+ */
 public class CM_info {
 
 	String C_name;

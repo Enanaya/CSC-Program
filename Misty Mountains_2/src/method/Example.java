@@ -6,8 +6,15 @@ import member.CM_info;
 import member.Climber;
 import member.Mountain;
 
+/**
+ * this is a example class to initialize data for a club,using static method.
+ *
+ */
 public class Example {
 
+	/**
+	 * @return return CM_info example
+	 */
 	public static ArrayList<CM_info> getCM_infos() {
 		ArrayList<CM_info> cm_infos = new ArrayList<CM_info>();
 
@@ -19,6 +26,9 @@ public class Example {
 		return cm_infos;
 	}
 
+	/**
+	 * @return return Mountains example
+	 */
 	public static ArrayList<Mountain> getMountains() {
 		ArrayList<Mountain> mountains = new ArrayList<Mountain>();
 
@@ -29,6 +39,9 @@ public class Example {
 		return mountains;
 	}
 
+	/**
+	 * @return return Climbers example
+	 */
 	public static ArrayList<Climber> getClimbers() {
 		ArrayList<Climber> climbers = new ArrayList<Climber>();
 

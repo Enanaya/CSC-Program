@@ -8,6 +8,10 @@ import java.util.Map;
 import method.Example;
 import method.mymethod;
 
+/**
+ * store all info about climbers and CM_info
+ *
+ */
 public class Club {
 	
 	Map<String,Climber> map=new HashMap<String,Climber>(); //keyÎªclimberµÄname
@@ -36,7 +40,8 @@ public class Club {
 		return climbers;
 	}
 	
-	/** foreach all climbers to find the max average using average method in class climber 
+	/**
+	 *  foreach all climbers to find the max average using average method in class climber 
 	 * @return (int) Max_average
 	 */
 	public Climber Max_average() {
@@ -52,7 +57,8 @@ public class Club {
 	}
 	
 	
-	/**foreach all climbers to find the max height using gethighest method in class climber 
+	/**
+	 * traverse all climbers to find the max height using gethighest method in class climber 
 	 * @return CM_info who has max height
 	 */
 	public CM_info getHighset()  {
@@ -76,9 +82,11 @@ public class Club {
 	}
 	
 	
-	/**foreach all CM_infos to select whose height is higher than input height
-	 * @param height 
-	 * @return ArrayList<CM_info> height high than input height
+	/**
+	 * 
+	 * traverse all CM_infos to select whose height is higher than input height
+	 * @param height  get from keyboard
+	 * @return CM_infos height high than input height
 	 */
 	public ArrayList<CM_info> pointed_height(int height) {
 		ArrayList<CM_info> pointed_CM=new ArrayList<CM_info>();

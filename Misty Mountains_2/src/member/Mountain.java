@@ -1,5 +1,9 @@
 package member;
 
+/**
+ * store info with name and height
+ *
+ */
 public class Mountain {
 	String M_name;
 	int height;
