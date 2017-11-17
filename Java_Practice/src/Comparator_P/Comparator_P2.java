@@ -37,7 +37,8 @@ public class Comparator_P2 {
 	            System.out.println("++++++" + comparatorDemo);
 	        }
 	        
-	        Comparator_P2 com[] = {new Comparator_P2("a", 4, 4),
+	        Comparator_P2 com[] = {
+	        		new Comparator_P2("a", 4, 4),
 	                new Comparator_P2("b", 3, 6),
 	                new Comparator_P2("c", 2, 3),
 	                new Comparator_P2("d", 1, 7)};
