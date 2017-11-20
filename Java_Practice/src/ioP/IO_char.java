@@ -11,9 +11,18 @@ import java.io.Writer;
 public class IO_char {
 	public static void main(String[] args) {
 		
+		IO_char io=new IO_char();
+		io.currentDir();
 //		test01();
-		test02();
+		//test02();
 	}
+	
+	public void currentDir() {//获取当前工作目录的bin
+		File f = new File(this.getClass().getResource("/").getPath()); 
+		//System.getProperty("user.dir")+"/src/ 获取当前src下目录
+		System.out.println(f);
+	}
+	
 	
 	public static void test01() {
 		
