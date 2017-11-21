@@ -18,6 +18,7 @@ public class CW2 {
 
 	public static void main(String[] args) {
 			Scanner read_sc = null;
+			ArrayList<String> as = null;
 			try {
 				// read
 				read_sc = new Scanner(new FileReader(new File(
@@ -25,9 +26,9 @@ public class CW2 {
 				while (read_sc.hasNextLine()) {
 					
 					String str = read_sc.nextLine();
-					ArrayList<String> as = new ArrayList<String>(
+					 as = new ArrayList<String>(
 							Arrays.asList(str.toLowerCase().split("[ .]|, ")));
-					
+				}
 					// delete all numbers
 					as.removeIf(n -> n.matches("[0-9]*"));
 					
@@ -45,9 +46,9 @@ public class CW2 {
 						else {
 							map.put(n,map.get(n)+1);
 						}
-					});
+					});	
 					
-					map.forEach((k,v)->System.out.println(k+"\t\t\t"+v)); 
+					map.forEach((k,v)->System.out.println(String.format("%-30s",k)+v)); 
 					
 					// deduplicate
 					HashSet<String> dis = new HashSet<>(as);
@@ -61,10 +62,14 @@ public class CW2 {
 					}
 
 					PrintWriter pw = new PrintWriter(new FileWriter(R_file));
-					as.forEach(n -> pw.write(n + "\n"));
+//					as.forEach(n -> pw.write(n + "\n"));
+					pw.write("");
+					map.forEach((k,v)->{
+						pw.append(String.format("%-30s",k)+v+"\n");
+					});
 					pw.flush();
 					pw.close();
-				}
+				
 			} catch (FileNotFoundException e) {
 				System.out.println("Can not find this file!");
 			} catch (IOException e) {
