@@ -12,11 +12,11 @@ import org.omg.PortableInterceptor.RequestInfo;
  * @author 76500
  * 创建服务器并启动
  */
-public class Server {
+public class Server2 {
 	private ServerSocket server;
 	private Socket client;
 	public static void main(String[] args) {
-		Server server=new Server()	;
+		Server2 server=new Server2()	;
 		server.start();
 		
 	}
@@ -35,14 +35,12 @@ public class Server {
 		try {
 			client= server.accept();
 			String msg=null;//接受客户端请求信息
-			StringBuilder sb=new StringBuilder();
-			BufferedReader  br=new BufferedReader(new InputStreamReader(client.getInputStream()));
-			while((msg=br.readLine()).length()>0) {
-				sb.append(msg);
-				sb.append("\r\n");
-			}
+			byte[] data=new byte[20480];
+			client.getInputStream().read(data);
 			
-			System.out.println(sb.toString());
+			msg=new String(data,0,data.length).trim();
+			System.out.println(msg);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();

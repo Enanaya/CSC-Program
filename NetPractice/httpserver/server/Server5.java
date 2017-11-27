@@ -1,22 +1,31 @@
 package server;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Date;
 
 import org.omg.PortableInterceptor.RequestInfo;
 
 /**
  * @author 76500
  * 创建服务器并启动
+ * 
+ * 1.请求
+ * 2.响应
  */
-public class Server {
+public class Server5 {
 	private ServerSocket server;
 	private Socket client;
+	public static final String CRLF="\r\n";
+	public static final String BLANK="";
+	
 	public static void main(String[] args) {
-		Server server=new Server()	;
+		Server5 server=new Server5()	;
 		server.start();
 		
 	}
@@ -35,14 +44,21 @@ public class Server {
 		try {
 			client= server.accept();
 			String msg=null;//接受客户端请求信息
-			StringBuilder sb=new StringBuilder();
-			BufferedReader  br=new BufferedReader(new InputStreamReader(client.getInputStream()));
-			while((msg=br.readLine()).length()>0) {
-				sb.append(msg);
-				sb.append("\r\n");
-			}
+			//请求
+			Request request=new Request(client.getInputStream());
 			
-			System.out.println(sb.toString());
+			//响应
+			
+			StringBuilder responseContent=new StringBuilder();
+			
+			Response res=new Response(client.getOutputStream());
+			
+			res.print("<html><head><title>HTTP响应实例</title>");
+			res.print("</head><body>");
+			res.print("欢迎：").print(request.getParameter("uname")).print("回来!");
+			res.print("</body></html>");
+			res.pushToClient(200);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
