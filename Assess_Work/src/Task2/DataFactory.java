@@ -3,6 +3,9 @@ package Task2;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 import Task1.SortedArrayList;
@@ -13,6 +16,8 @@ public class DataFactory {
 	int clientCount;
 	SortedArrayList<Event> eventList = new SortedArrayList<Event>();
 	SortedArrayList<Client> clientlist = new SortedArrayList<Client>();
+	File readFile;
+	public static final String CRLF = "\r\n";
 
 	// ArrayList<Integer> eventNumList=new ArrayList<Integer>();
 	public DataFactory() {
@@ -22,14 +27,14 @@ public class DataFactory {
 
 	public void read() {
 		try {
-			File file = new File(System.getProperty("user.dir") + "/src/Task2/Input_File");
-			if (file.length() == 0) {
+			readFile = new File(System.getProperty("user.dir") + "/src/Task2/Input_File");
+			if (readFile.length() == 0) {
 				System.out.println("No content in file!");
 				return;
 			} else {
-				sc = new Scanner(new FileReader(file));
+				sc = new Scanner(new FileReader(readFile));
 				eventCount = Integer.valueOf(sc.nextLine());// read the first line to get the number of events
-				int readeventCount = eventCount;
+				int readeventCount = eventCount; // replace it in read loop
 				while (sc.hasNextLine() && readeventCount > 0) {
 					String Ename = sc.nextLine();
 					int Enum = sc.nextInt();
@@ -39,12 +44,28 @@ public class DataFactory {
 				}
 
 				clientCount = sc.nextInt();// another to read one line of number
-				int readclientCount = clientCount;
+				int readclientCount = clientCount; // replace it in read loop
 				sc.nextLine();
-				while (readclientCount > 0) {
+				while (sc.hasNextLine() && readclientCount > 0) {
 					String[] str = sc.nextLine().split(" ");
-					clientlist.add(new Client(str[0], str[1]));
+					Client current=new Client(str[0], str[1]);
+					clientlist.add(current );
 					readclientCount--;
+
+					if (str.length > 2) {
+						if (str.length==4) {
+							current.addEvent(str[2], Integer.valueOf(str[3]));
+						}
+						if (str.length==6) {
+							current.addEvent(str[2], Integer.valueOf(str[3]));
+							current.addEvent(str[4], Integer.valueOf(str[5]));
+						}
+						if (str.length==8) {
+							current.addEvent(str[2], Integer.valueOf(str[3]));
+							current.addEvent(str[4], Integer.valueOf(str[5]));
+							current.addEvent(str[6], Integer.valueOf(str[7]));
+						}
+					}
 				}
 
 			}
@@ -55,11 +76,52 @@ public class DataFactory {
 	}
 
 	public void write() {
-		File file = new File(System.getProperty("user.dir") + "/src/Task2/Input_File");
+		File outfile = new File(System.getProperty("user.dir") + "/src/Task2/Input_File1");
+		if (!outfile.exists()) {
+			try {
+				outfile.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		try {
-			sc = new Scanner(new FileReader(file));
-			
+			sc = new Scanner(new FileReader(readFile));
+			PrintWriter outsc = new PrintWriter(new FileWriter(outfile));
+			outsc.write("");
+			outsc.write(sc.nextInt()+CRLF); // write the number of event
+			sc.nextLine();
+
+			while (sc.hasNextLine() && eventCount > 0) {
+				for (Event event : eventList) {
+					outsc.append(event.getName() + CRLF);
+					outsc.append(event.getT_number() + CRLF);
+					eventCount--;
+				}
+			}
+			sc.nextLine();
+			while (sc.hasNextLine() && clientCount > 0) {
+				for (Client client : clientlist) {
+					outsc.append(client.getFirstname() + " " + client.getSurname() + "\t");
+					// check the bug if null
+					for (Event eventinC : client.getEventOwn()) {
+						outsc.append(eventinC.getName() + " " + eventinC.getT_number());
+					}
+					outsc.append(CRLF);
+					clientCount--;
+				}
+			}
+			//not finish to repalce file
+			outsc.flush();
+			outsc.close();
+			File temp=readFile;
+			readFile.delete();
+			outfile.renameTo(temp);
+			temp.delete();
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
