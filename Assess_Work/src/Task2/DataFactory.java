@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 import Task1.SortedArrayList;
@@ -19,9 +22,7 @@ public class DataFactory {
 	File readFile;
 	public static final String CRLF = "\r\n";
 
-	// ArrayList<Integer> eventNumList=new ArrayList<Integer>();
 	public DataFactory() {
-		// TODO Auto-generated constructor stub
 		read();
 	}
 
@@ -48,26 +49,30 @@ public class DataFactory {
 				sc.nextLine();
 				while (sc.hasNextLine() && readclientCount > 0) {
 					String[] str = sc.nextLine().split(" ");
-					Client current=new Client(str[0], str[1]);
-					clientlist.add(current );
-					readclientCount--;
-
+					Client current = new Client(str[0], str[1]);
+					/*
+					 * ArrayList<String> temp=new ArrayList<String>(str.length);
+					 * Collections.addAll(temp, str); temp.removeIf(n->n==" ");
+					 * str=(String[])temp.toArray();
+					 */
 					if (str.length > 2) {
-						if (str.length==4) {
+						if (str.length == 4) {
 							current.addEvent(str[2], Integer.valueOf(str[3]));
 						}
-						if (str.length==6) {
+						if (str.length == 6) {
 							current.addEvent(str[2], Integer.valueOf(str[3]));
 							current.addEvent(str[4], Integer.valueOf(str[5]));
 						}
-						if (str.length==8) {
+						if (str.length == 8) {
 							current.addEvent(str[2], Integer.valueOf(str[3]));
 							current.addEvent(str[4], Integer.valueOf(str[5]));
 							current.addEvent(str[6], Integer.valueOf(str[7]));
 						}
 					}
+					clientlist.add(current);
+					readclientCount--;
 				}
-
+				sc.close();
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -89,35 +94,39 @@ public class DataFactory {
 			sc = new Scanner(new FileReader(readFile));
 			PrintWriter outsc = new PrintWriter(new FileWriter(outfile));
 			outsc.write("");
-			outsc.write(sc.nextInt()+CRLF); // write the number of event
+			outsc.write(sc.nextInt() + CRLF); // write the number of event
 			sc.nextLine();
 
 			while (sc.hasNextLine() && eventCount > 0) {
 				for (Event event : eventList) {
-					outsc.append(event.getName() + CRLF);
-					outsc.append(event.getT_number() + CRLF);
+					outsc.append(event.getName() + CRLF + event.getT_number() + CRLF);
+					// outsc.append(event.getT_number() + CRLF);
 					eventCount--;
 				}
 			}
-			sc.nextLine();
+			outsc.append(String.valueOf(clientCount) + CRLF);
 			while (sc.hasNextLine() && clientCount > 0) {
 				for (Client client : clientlist) {
-					outsc.append(client.getFirstname() + " " + client.getSurname() + "\t");
+					outsc.append(client.getFirstname() + " " + client.getSurname() + " ");
 					// check the bug if null
 					for (Event eventinC : client.getEventOwn()) {
-						outsc.append(eventinC.getName() + " " + eventinC.getT_number());
+						outsc.append(eventinC.getName() + " " + eventinC.getT_number() + " ");
 					}
-					outsc.append(CRLF);
+					if (clientCount > 1) {
+						outsc.append(CRLF);
+					}
 					clientCount--;
 				}
 			}
-			//not finish to repalce file
+
 			outsc.flush();
 			outsc.close();
-			File temp=readFile;
+			sc.close();
+			String path = readFile.getAbsolutePath();
 			readFile.delete();
-			outfile.renameTo(temp);
-			temp.delete();
+			outfile.renameTo(new File(path));
+			// outfile.renameTo(new File(System.getProperty("user.dir") +
+			// "/src/Task2/Input_File"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -147,7 +156,7 @@ public class DataFactory {
 		// TODO Auto-generated method stub
 		for (Client clients : clientlist) {
 			System.out.print(clients.getFirstname() + " " + clients.getSurname() + "\t");
-			clients.getEventOwn().forEach(n -> System.out.print(n.getName() + "\t" + n.getT_number()));
+			clients.getEventOwn().forEach(n -> System.out.print(n.getName() + " " + n.getT_number() + " "));
 			System.out.println();
 		}
 	}
@@ -182,8 +191,13 @@ public class DataFactory {
 		}
 
 		if (EmatchFlag && CmatchFlag) {
-			eventList.get(eventIndex).buyTicket(amount);
-			clientlist.get(clientIndex).addEvent(eventName, amount);
+			boolean enoughF=eventList.get(eventIndex).buyTicket(amount);
+			if (enoughF) {
+				clientlist.get(clientIndex).addEvent(eventName, amount);
+			}
+			else {
+				clientlist.get(clientIndex).infoClient(eventName);
+			}
 		}
 
 		if (!CmatchFlag) {

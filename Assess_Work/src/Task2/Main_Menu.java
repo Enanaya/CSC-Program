@@ -21,10 +21,12 @@ public class Main_Menu {
 				break;
 			case "e":
 				df.printEvent();
+				System.out.println("\npress enter to go back menu");
 				menuSc.nextLine();
 				break;
 			case "c":
 				df.printClient();
+				System.out.println("\npress enter to go back menu");
 				menuSc.nextLine();
 				break;
 			case "b":
@@ -39,6 +41,7 @@ public class Main_Menu {
 				int tic = bsc.nextInt();
 				bsc.nextLine();
 				df.buyTicket(fir, sur, eve, tic);
+				System.out.println("\npress enter to go back menu");
 				bsc.nextLine();
 				break;
 			case "r":
@@ -53,6 +56,8 @@ public class Main_Menu {
 				int tic1 = rsc.nextInt();
 				rsc.nextLine();
 				df.cancelTicket(fir1, sur1, eve1, tic1);
+				System.out.println("\npress enter to go back menu");
+				rsc.nextLine();
 				break;
 			default:
 				break;
