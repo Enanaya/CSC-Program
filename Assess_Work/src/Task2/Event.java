@@ -24,6 +24,11 @@ public class Event implements Comparable<Event> {
 		return T_number;
 	}
 
+	/**
+	 * @param amount
+	 * @return true or false
+	 * buy tickets and update the current tickets' information
+	 */
 	public boolean buyTicket(int amount) {
 		if (amount <= this.T_number) {
 			this.T_number -= amount;
@@ -37,11 +42,21 @@ public class Event implements Comparable<Event> {
 
 	
 
+	/**
+	 * @param amount
+	 * after a client cancel tickets,update the information of ticket,
+	   need add the amount canceled by client to current tickets matching with event
+	 */
 	public void cancleTicket(int amount) {
 		this.T_number += amount;
 	}
 
-	// method for client to cancle ticket info in itself
+	/**
+	 * @param amount
+	 * while client cancel ticket,call this method to minus amount for event matching to client
+	 * differ from cancleTicket:this method will be called by client to cancel client's ticket
+	 , method cancleTicket do operation after this method to update total amount of tickets
+	 */
 	public void ticketMinusInClient(int amount) {
 		this.T_number -= amount;
 	}
@@ -49,6 +64,7 @@ public class Event implements Comparable<Event> {
 	@Override
 	public int compareTo(Event o) {
 		// TODO Auto-generated method stub
+		// compare by event's name
 		int res = this.getName().substring(0, 1).compareTo(o.getName().substring(0, 1));
 		return res;
 	}

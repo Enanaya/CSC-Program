@@ -30,6 +30,11 @@ public class Client implements Comparable<Client> {
 		return eventOwn;
 	}
 
+	/**
+	 * @param name event_name
+	 * @param ticket_amount
+	 * when a client buy a or more tickets,add the information into this client 
+	 */
 	public void addEvent(String name, int ticket_amount) {
 		if (event_most < 3) {
 			this.eventOwn.add(new Event(name, ticket_amount));
@@ -39,6 +44,11 @@ public class Client implements Comparable<Client> {
 		}
 	}
 
+	/**
+	 * @param name
+	 * @param amount
+	 * when a client cancel a or more tickets,update the information into this client
+	 */
 	public void ticketCancle_C(String name, int amount) {
 		int removeC = -1;
 		for (Event event : eventOwn) {
@@ -58,10 +68,14 @@ public class Client implements Comparable<Client> {
 
 	}
 
+	/**
+	 * @param eName
+	 * while client fail to buy ticket because of not enough ticket,print the info into a file
+	 */
 	public void infoClient(String eName) {
 		// TODO Auto-generated method stub
 		try {
-			File file=new File(System.getProperty("user.dir") + "/src/Task2/info_letter");
+			File file=new File(System.getProperty("user.dir") + "/src/Task2/info_letter.txt");
 			PrintWriter pw=new PrintWriter(file);
 			if (!file.exists()) {
 				file.createNewFile();
@@ -80,6 +94,7 @@ public class Client implements Comparable<Client> {
 	@Override
 	public int compareTo(Client o) {
 		// TODO Auto-generated method stub
+		// compare by client's surname,if meet same surname,then compare first name
 		int res;
 		res = this.getSurname().compareTo(o.getSurname());
 		if (res == 0) {

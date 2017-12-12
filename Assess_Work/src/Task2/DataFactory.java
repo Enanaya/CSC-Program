@@ -22,13 +22,17 @@ public class DataFactory {
 	File readFile;
 	public static final String CRLF = "\r\n";
 
+	/**
+	 * while initialize this class,call method read to read data from file "Info_File.txt"
+	 *  which is stored in current work path
+	 */
 	public DataFactory() {
 		read();
 	}
 
 	public void read() {
 		try {
-			readFile = new File(System.getProperty("user.dir") + "/src/Task2/Input_File");
+			readFile = new File(System.getProperty("user.dir") + "/src/Task2/Info_File.txt");
 			if (readFile.length() == 0) {
 				System.out.println("No content in file!");
 				return;
@@ -55,6 +59,12 @@ public class DataFactory {
 					 * Collections.addAll(temp, str); temp.removeIf(n->n==" ");
 					 * str=(String[])temp.toArray();
 					 */
+					
+					// read the info in client,spilt into array,
+					//if length<2,means it hasn't buy any ticket
+					//else if length=4,buy ticket for one event
+					//else if length=6,buy ticket for two events 
+					//else if length=8,buy ticket for three events 
 					if (str.length > 2) {
 						if (str.length == 4) {
 							current.addEvent(str[2], Integer.valueOf(str[3]));
@@ -80,8 +90,11 @@ public class DataFactory {
 		}
 	}
 
+	/**
+	 * after input "f" during main menu, store the data into info_File then terminate the program
+	 */
 	public void write() {
-		File outfile = new File(System.getProperty("user.dir") + "/src/Task2/Input_File1");
+		File outfile = new File(System.getProperty("user.dir") + "/src/Task2/Info_File1.txt");
 		if (!outfile.exists()) {
 			try {
 				outfile.createNewFile();
@@ -145,6 +158,9 @@ public class DataFactory {
 		return this.eventList;
 	}
 
+	/**
+	 * print out the current data of all events
+	 */
 	public void printEvent() {
 		// TODO Auto-generated method stub
 		for (Event event : eventList) {
@@ -152,6 +168,9 @@ public class DataFactory {
 		}
 	}
 
+	/**
+	 * print out the current data of all clients
+	 */
 	public void printClient() {
 		// TODO Auto-generated method stub
 		for (Client clients : clientlist) {
@@ -165,6 +184,13 @@ public class DataFactory {
 		return this.clientlist;
 	}
 
+	/**
+	 * @param clientFirName
+	 * @param clientSurName
+	 * @param eventName
+	 * @param amount
+	 * handle the operation of buying ticket,call method in client and event
+	 */
 	public void buyTicket(String clientFirName, String clientSurName, String eventName, int amount) {
 		// TODO Auto-generated method stub
 		// Cmatchflag: 0->no client ; 1->client matched ;
@@ -202,14 +228,21 @@ public class DataFactory {
 
 		if (!CmatchFlag) {
 			System.out.println("Illegal cilent!");
-			System.out.println("press enter to go back menu");
+//			System.out.println("press enter to go back menu");
 		}
 		if (!EmatchFlag) {
 			System.out.println("Illegal event!");
-			System.out.println("press enter to go back menu");
+//			System.out.println("press enter to go back menu");
 		}
 	}
 
+	/**
+	 * @param clientFirName
+	 * @param clientSurName
+	 * @param eventName
+	 * @param amount
+	 * handle the operation of canceling ticket,call method in client and event
+	 */
 	public void cancelTicket(String clientFirName, String clientSurName, String eventName, int amount) {
 		// TODO Auto-generated method stub
 		// Cmatchflag: 0->no client ; 1->client matched ;
