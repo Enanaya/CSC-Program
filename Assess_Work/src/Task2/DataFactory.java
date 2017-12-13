@@ -6,13 +6,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Scanner;
 
 import Task1.SortedArrayList;
 
+/**
+ * @author Africo Liang
+ * get the operation from class Main_Menu then process data
+ */
 public class DataFactory {
 	Scanner sc;
 	int eventCount;
@@ -23,14 +24,18 @@ public class DataFactory {
 	public static final String CRLF = "\r\n";
 
 	/**
-	 * while initialize this class,call method read to read data from file "Info_File.txt"
-	 *  which is stored in current work path
+	 * while initialize this class,call method read to read data from file
+	 * "Info_File.txt" which is stored in current work path
 	 */
 	public DataFactory() {
 		read();
 	}
 
+	/**
+	 * read data and process,transform into client and event
+	 */
 	public void read() {
+		// this try catch part read the data from file
 		try {
 			readFile = new File(System.getProperty("user.dir") + "/src/Task2/Info_File.txt");
 			if (readFile.length() == 0) {
@@ -48,23 +53,25 @@ public class DataFactory {
 					readeventCount--;
 				}
 
+				/*
+				 * deal with the ciletn data,spilt the string of whole line then set the string
+				 * in[0]and[1] as client's name;the rest part should be event and ticket bought
+				 * by cilent 3 condition that 1 kind of event,then 2 and 3
+				 */
 				clientCount = sc.nextInt();// another to read one line of number
 				int readclientCount = clientCount; // replace it in read loop
 				sc.nextLine();
 				while (sc.hasNextLine() && readclientCount > 0) {
 					String[] str = sc.nextLine().split(" ");
 					Client current = new Client(str[0], str[1]);
-					/*
-					 * ArrayList<String> temp=new ArrayList<String>(str.length);
-					 * Collections.addAll(temp, str); temp.removeIf(n->n==" ");
-					 * str=(String[])temp.toArray();
+
+					/* 
+					 * read the info in client,spilt into array,
+					 * if length<2,means it hasn't buy any ticket
+					 * else if length=4,buy ticket for one event
+					 * else if length=6,buy ticket for two events
+					 * else if length=8,buy ticket for three events
 					 */
-					
-					// read the info in client,spilt into array,
-					//if length<2,means it hasn't buy any ticket
-					//else if length=4,buy ticket for one event
-					//else if length=6,buy ticket for two events 
-					//else if length=8,buy ticket for three events 
 					if (str.length > 2) {
 						if (str.length == 4) {
 							current.addEvent(str[2], Integer.valueOf(str[3]));
@@ -91,7 +98,8 @@ public class DataFactory {
 	}
 
 	/**
-	 * after input "f" during main menu, store the data into info_File then terminate the program
+	 * after input "f" during main menu, store the data into info_File then
+	 * terminate the program
 	 */
 	public void write() {
 		File outfile = new File(System.getProperty("user.dir") + "/src/Task2/Info_File1.txt");
@@ -103,6 +111,7 @@ public class DataFactory {
 				e.printStackTrace();
 			}
 		}
+		// rewrite the data into file
 		try {
 			sc = new Scanner(new FileReader(readFile));
 			PrintWriter outsc = new PrintWriter(new FileWriter(outfile));
@@ -149,11 +158,6 @@ public class DataFactory {
 		}
 	}
 
-	// public static void main(String[] args) {
-	// DataReader dr = new DataReader();
-	// dr.read();
-	// }
-
 	public SortedArrayList<Event> getEventList() {
 		return this.eventList;
 	}
@@ -188,8 +192,7 @@ public class DataFactory {
 	 * @param clientFirName
 	 * @param clientSurName
 	 * @param eventName
-	 * @param amount
-	 * handle the operation of buying ticket,call method in client and event
+	 * @param amount handle the operation of buying ticket,call method in client and event
 	 */
 	public void buyTicket(String clientFirName, String clientSurName, String eventName, int amount) {
 		// TODO Auto-generated method stub
@@ -199,41 +202,33 @@ public class DataFactory {
 		boolean EmatchFlag = false;
 
 		int clientIndex = 0;
-		for (int i = 0; i < clientlist.size(); i++) {
-			if (clientlist.get(i).getSurname().equals(clientSurName)
-					&& clientlist.get(i).getFirstname().equals(clientFirName)) {
+		for (Client client : clientlist) {
+			if (client.getSurname().equals(clientSurName) && client.getFirstname().equals(clientFirName)) {
+				clientIndex = clientlist.indexOf(client);
 				CmatchFlag = true;
-				clientIndex = i;
 				break;
 			}
 		}
+
 		int eventIndex = 0;
-		for (int i = 0; i < eventList.size(); i++) {
-			if (eventList.get(i).getName().equals(eventName)) {
+		for (Event event : eventList) {
+			if (event.getName().equals(eventName)) {
 				EmatchFlag = true;
-				eventIndex = i;
+				eventIndex = eventList.indexOf(event);
 				break;
 			}
 		}
 
 		if (EmatchFlag && CmatchFlag) {
-			boolean enoughF=eventList.get(eventIndex).buyTicket(amount);
+			boolean enoughF = eventList.get(eventIndex).buyTicket(amount);
 			if (enoughF) {
 				clientlist.get(clientIndex).addEvent(eventName, amount);
-			}
-			else {
+			} else {
 				clientlist.get(clientIndex).infoClient(eventName);
 			}
 		}
 
-		if (!CmatchFlag) {
-			System.out.println("Illegal cilent!");
-//			System.out.println("press enter to go back menu");
-		}
-		if (!EmatchFlag) {
-			System.out.println("Illegal event!");
-//			System.out.println("press enter to go back menu");
-		}
+		getIllegalMsg(CmatchFlag, EmatchFlag);
 	}
 
 	/**
@@ -241,7 +236,8 @@ public class DataFactory {
 	 * @param clientSurName
 	 * @param eventName
 	 * @param amount
-	 * handle the operation of canceling ticket,call method in client and event
+	 * handle the operation of canceling ticket,call method in client and
+	 * event
 	 */
 	public void cancelTicket(String clientFirName, String clientSurName, String eventName, int amount) {
 		// TODO Auto-generated method stub
@@ -251,41 +247,72 @@ public class DataFactory {
 		boolean EmatchFlag = false;
 
 		int clientIndex = 0;
-		for (int i = 0; i < clientlist.size(); i++) {
-			if (clientlist.get(i).getSurname().equals(clientSurName)
-					&& clientlist.get(i).getFirstname().equals(clientFirName)) {
+		for (Client client : clientlist) {
+			if (client.getSurname().equals(clientSurName) && client.getFirstname().equals(clientFirName)) {
+				clientIndex = clientlist.indexOf(client);
 				CmatchFlag = true;
-				clientIndex = i;
 				break;
 			}
 		}
+
 		int eventIndex = 0;
-		for (int i = 0; i < eventList.size(); i++) {
-			if (eventList.get(i).getName().equals(eventName)) {
+		for (Event event : eventList) {
+			if (event.getName().equals(eventName)) {
 				EmatchFlag = true;
-				eventIndex = i;
+				eventIndex = eventList.indexOf(event);
 				break;
 			}
 		}
 
 		if (EmatchFlag && CmatchFlag) {
+			if (clientlist.get(clientIndex).getEventOwn().size() == 0) {
+				System.out.println("this client haven't any ticket");
+			}
 			for (Event event : clientlist.get(clientIndex).getEventOwn()) {
 				if (event.getName().equals(eventName)) {
-					eventList.get(eventIndex).cancleTicket(amount);
 					clientlist.get(clientIndex).ticketCancle_C(eventName, amount);
+					eventList.get(eventIndex).cancleTicket(amount);
 					break;
 				}
 			}
 		}
 
-		if (!CmatchFlag) {
+		getIllegalMsg(CmatchFlag, EmatchFlag);
+	}
+
+	/**
+	 * while get illegal input,print the msg out
+	 * @param Cflag judge whether get illegal client
+	 * @param Eflag judge whether get illegal event
+	 */
+	public void getIllegalMsg(boolean Cflag, boolean Eflag) {
+		if (!Cflag) {
 			System.out.println("Illegal cilent!");
-			System.out.println("press enter to go back menu");
 		}
-		if (!EmatchFlag) {
+		if (!Eflag) {
 			System.out.println("Illegal event!");
-			System.out.println("press enter to go back menu");
 		}
 	}
 
+	/**
+	 * while client choose a event to buy ticket,show its current,if there is
+	 * matched event return true, else return false,back to main menu
+	 * 
+	 * @param Ename
+	 * @return
+	 */
+	public boolean showpointedTicket(String Ename) {
+		boolean Ematchflag = false;
+		for (Event event : eventList) {
+			if (event.getName().equals(Ename)) {
+				System.out.println("current tickets: " + event.getT_number());
+				Ematchflag = true;
+				break;
+			}
+		}
+		if (!Ematchflag) {
+			System.out.println("Illegal event!");
+		}
+		return Ematchflag;
+	}
 }

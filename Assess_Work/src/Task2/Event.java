@@ -1,10 +1,9 @@
 package Task2;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
+/**
+ * @author Africo Liang
+ * event can compare by its name
+ */
 public class Event implements Comparable<Event> {
 
 	private String name;
@@ -23,6 +22,10 @@ public class Event implements Comparable<Event> {
 	public int getT_number() {
 		return T_number;
 	}
+	
+	public void setT_number(int t_number) {
+		T_number = t_number;
+	}
 
 	/**
 	 * @param amount
@@ -39,8 +42,6 @@ public class Event implements Comparable<Event> {
 			return false;
 		}
 	}
-
-	
 
 	/**
 	 * @param amount

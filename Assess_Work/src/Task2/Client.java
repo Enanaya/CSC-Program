@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+/**
+ * @author Africo Liang
+ * client can compare by surname and first name
+ */
 public class Client implements Comparable<Client> {
 	private String surname;
 	private String firstname;
@@ -36,11 +40,28 @@ public class Client implements Comparable<Client> {
 	 * when a client buy a or more tickets,add the information into this client 
 	 */
 	public void addEvent(String name, int ticket_amount) {
-		if (event_most < 3) {
-			this.eventOwn.add(new Event(name, ticket_amount));
-			event_most++;
+		boolean addflag=false;
+		boolean isFourthT=false;
+		for (Event event : eventOwn) {
+			if (event.getName().equals(name)) {
+				isFourthT=true;
+				break;
+			}
+		}
+		if (event_most < 3 || isFourthT) {
+			for (Event event : eventOwn) {
+				if (event.getName().equals(name)) {
+					event.setT_number(event.getT_number()+ticket_amount);
+					addflag=true;
+					break;
+				}
+			}
+			if (!addflag) {
+				this.eventOwn.add(new Event(name, ticket_amount));
+				event_most++;
+			}
 		} else {
-			System.out.println("this client can not have tickets for more than 4 kinds of events");
+			System.out.println("this client can not have tickets for more than 3 kinds of events");
 		}
 	}
 
@@ -51,6 +72,7 @@ public class Client implements Comparable<Client> {
 	 */
 	public void ticketCancle_C(String name, int amount) {
 		int removeC = -1;
+		
 		for (Event event : eventOwn) {
 			if (event.getName().equals(name)) {
 				if (event.getT_number() < amount) {
@@ -75,7 +97,8 @@ public class Client implements Comparable<Client> {
 	public void infoClient(String eName) {
 		// TODO Auto-generated method stub
 		try {
-			File file=new File(System.getProperty("user.dir") + "/src/Task2/info_letter.txt");
+			File file=new File(System.getProperty("user.dir") + "/src/Task2/info_to_"+
+		this.firstname+"_"+this.surname);
 			PrintWriter pw=new PrintWriter(file);
 			if (!file.exists()) {
 				file.createNewFile();

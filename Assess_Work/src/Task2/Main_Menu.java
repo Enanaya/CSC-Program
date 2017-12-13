@@ -8,12 +8,11 @@ public class Main_Menu {
 		Scanner menuSc;
 		while (true) {
 			menuSc = new Scanner(System.in);
-			System.out.println("f - to finish running the program");
-			System.out.println("e - to display on the screen the information about all the events");
-			System.out.println("c - to display on the screen the information about all the clients");
-			System.out
-					.println("b - to update the stored data when tickets are bought by one of the registered clients");
-			System.out.println("r - to update the stored data when a registered client cancels/returns tickets");
+			System.out.println("f - terminate the program");
+			System.out.println("e - display on the screen the information about all the events");
+			System.out.println("c - display on the screen the information about all the clients");
+			System.out.println("b - registered client buy tickets then update the information");
+			System.out.println("r - registered client cancel tickets then update the information");
 			switch (menuSc.nextLine()) {
 			case "f":
 				df.write();
@@ -37,10 +36,12 @@ public class Main_Menu {
 				String fir = bsc.nextLine();
 				System.out.println("input event");
 				String eve = bsc.nextLine();
-				System.out.println("input how much ticket to buy");
-				int tic = bsc.nextInt();
-				bsc.nextLine();
-				df.buyTicket(fir, sur, eve, tic);
+				if (df.showpointedTicket(eve)) {
+					System.out.println("input how much ticket to buy");
+					int tic = bsc.nextInt();
+					bsc.nextLine();
+					df.buyTicket(fir, sur, eve, tic);
+				}
 				System.out.println("\npress enter to go back menu");
 				bsc.nextLine();
 				break;
