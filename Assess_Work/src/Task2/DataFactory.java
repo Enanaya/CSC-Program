@@ -16,8 +16,8 @@ import Task1.SortedArrayList;
  */
 public class DataFactory {
 	Scanner sc;
-	int eventCount;
-	int clientCount;
+	int eventCount; //to read and store how many events in system
+	int clientCount; //to read and store how many clients in system
 	SortedArrayList<Event> eventList = new SortedArrayList<Event>();
 	SortedArrayList<Client> clientlist = new SortedArrayList<Client>();
 	File readFile;
@@ -63,7 +63,8 @@ public class DataFactory {
 				sc.nextLine();
 				while (sc.hasNextLine() && readclientCount > 0) {
 					String[] str = sc.nextLine().split(" ");
-					Client current = new Client(str[0], str[1]);
+					//transform the first and second string as client
+					Client current = new Client(str[0], str[1]); 
 
 					/* 
 					 * read the info in client,spilt into array,
@@ -144,6 +145,7 @@ public class DataFactory {
 			outsc.flush();
 			outsc.close();
 			sc.close();
+			// replace the file
 			String path = readFile.getAbsolutePath();
 			readFile.delete();
 			outfile.renameTo(new File(path));
@@ -170,6 +172,7 @@ public class DataFactory {
 		for (Event event : eventList) {
 			System.out.println(String.format("%-30s", event.getName()) + event.getT_number());
 		}
+		System.out.println();
 	}
 
 	/**
@@ -182,6 +185,7 @@ public class DataFactory {
 			clients.getEventOwn().forEach(n -> System.out.print(n.getName() + " " + n.getT_number() + " "));
 			System.out.println();
 		}
+		System.out.println();
 	}
 
 	public SortedArrayList<Client> getClientsList() {
@@ -258,8 +262,8 @@ public class DataFactory {
 		int eventIndex = 0;
 		for (Event event : eventList) {
 			if (event.getName().equals(eventName)) {
-				EmatchFlag = true;
 				eventIndex = eventList.indexOf(event);
+				EmatchFlag = true;
 				break;
 			}
 		}
@@ -270,8 +274,9 @@ public class DataFactory {
 			}
 			for (Event event : clientlist.get(clientIndex).getEventOwn()) {
 				if (event.getName().equals(eventName)) {
-					clientlist.get(clientIndex).ticketCancle_C(eventName, amount);
-					eventList.get(eventIndex).cancleTicket(amount);
+					if (clientlist.get(clientIndex).ticketCancleInClient(eventName, amount)) {
+						eventList.get(eventIndex).cancleTicket(amount);
+					}
 					break;
 				}
 			}

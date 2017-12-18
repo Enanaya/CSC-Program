@@ -4,14 +4,14 @@ Athletics
 Equestrian Jumping
 7
 Football
-0
+1
 Handball
-42
+30
 Tennis
-5
+6
 Volleyball
 30
 3
-Anna Smith Football 2 Handball 3 Tennis 3 
-Emma Williams Volleyball 11 Handball 21 
+Anna Smith Football 1 Handball 26 Volleyball 11 
+Emma Williams Handball 10 
 John Williams 

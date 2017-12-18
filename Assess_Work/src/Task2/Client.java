@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class Client implements Comparable<Client> {
 	private String surname;
 	private String firstname;
-	private int event_most = 0; // can not more than 3
-	private ArrayList<Event> eventOwn;
+	private int event_most = 0; // can not have tickets to more than 3 kinds event
+	private ArrayList<Event> eventOwn; //store client's event that already bought tickets
 
 	public Client(String firstname, String surname) {
 		super();
@@ -35,29 +35,29 @@ public class Client implements Comparable<Client> {
 	}
 
 	/**
-	 * @param name event_name
+	 * @param Ename event_name
 	 * @param ticket_amount
 	 * when a client buy a or more tickets,add the information into this client 
 	 */
-	public void addEvent(String name, int ticket_amount) {
-		boolean addflag=false;
-		boolean isFourthT=false;
+	public void addEvent(String Ename, int ticket_amount) {
+		boolean addflag=false; //judge whether client already have ticket of this event by Ename
+		boolean isFourthT=false; //judge whether it is the fourth kind of event
 		for (Event event : eventOwn) {
-			if (event.getName().equals(name)) {
+			if (event.getName().equals(Ename)) {
 				isFourthT=true;
 				break;
 			}
 		}
 		if (event_most < 3 || isFourthT) {
 			for (Event event : eventOwn) {
-				if (event.getName().equals(name)) {
+				if (event.getName().equals(Ename)) {
 					event.setT_number(event.getT_number()+ticket_amount);
 					addflag=true;
 					break;
 				}
 			}
 			if (!addflag) {
-				this.eventOwn.add(new Event(name, ticket_amount));
+				this.eventOwn.add(new Event(Ename, ticket_amount));
 				event_most++;
 			}
 		} else {
@@ -70,24 +70,25 @@ public class Client implements Comparable<Client> {
 	 * @param amount
 	 * when a client cancel a or more tickets,update the information into this client
 	 */
-	public void ticketCancle_C(String name, int amount) {
-		int removeC = -1;
+	public boolean ticketCancleInClient(String name, int amount) {
+		int Eindenx =0; //index of event need to cancel ticket 
 		
 		for (Event event : eventOwn) {
 			if (event.getName().equals(name)) {
 				if (event.getT_number() < amount) {
 					System.out.println("this client doesn't have so much tickets for this event!");
+					return false;
 				} else {
 					event.ticketMinusInClient(amount);
-					removeC++;
+					Eindenx=eventOwn.indexOf(event);
 					break;
 				}
 			}
 		}
-		if (eventOwn.get(removeC).getT_number() == 0) {
-			eventOwn.remove(removeC);
+		if (eventOwn.get(Eindenx).getT_number() == 0) {
+			eventOwn.remove(Eindenx);
 		}
-
+		return true;
 	}
 
 	/**
@@ -98,7 +99,7 @@ public class Client implements Comparable<Client> {
 		// TODO Auto-generated method stub
 		try {
 			File file=new File(System.getProperty("user.dir") + "/src/Task2/info_to_"+
-		this.firstname+"_"+this.surname);
+		this.firstname+"_"+this.surname+".txt");
 			PrintWriter pw=new PrintWriter(file);
 			if (!file.exists()) {
 				file.createNewFile();

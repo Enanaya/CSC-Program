@@ -7,7 +7,7 @@ package Task2;
 public class Event implements Comparable<Event> {
 
 	private String name;
-	private int T_number;
+	private int T_number; //amount of ticket
 
 	public Event(String name, int t_number) {
 		super();

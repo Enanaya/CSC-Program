@@ -6,6 +6,11 @@ public class Main_Menu {
 	public static void main(String[] args) {
 		DataFactory df = new DataFactory();
 		Scanner menuSc;
+		System.out.println("current information of events");
+		df.printEvent();
+		System.out.println("current information of events");
+		df.printClient();
+		
 		while (true) {
 			menuSc = new Scanner(System.in);
 			System.out.println("f - terminate the program");
@@ -20,12 +25,12 @@ public class Main_Menu {
 				break;
 			case "e":
 				df.printEvent();
-				System.out.println("\npress enter to go back menu");
+				System.out.println("press enter to go back menu");
 				menuSc.nextLine();
 				break;
 			case "c":
 				df.printClient();
-				System.out.println("\npress enter to go back menu");
+				System.out.println("press enter to go back menu");
 				menuSc.nextLine();
 				break;
 			case "b":

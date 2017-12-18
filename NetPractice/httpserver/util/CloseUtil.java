@@ -2,6 +2,7 @@ package util;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.net.Socket;
 
 /**
  * @author 76500
@@ -20,4 +21,15 @@ public class CloseUtil {
 			}
 		}
 	}
+	
+	public static void closeSocket(Socket socket) {
+		try {
+			if (null !=socket) {
+				socket.close();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		}
+	
 }
