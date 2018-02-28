@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Company {
-	private Map<String, DrivingLicence> record;
+	private Map<DrivingLicence, Car> record;
+	
+	/**
+	 * store the info of all cars(70 at all) 
+	 */
 	private ArrayList<Car> cars;
 	
 	/** This method returns the number of cars of the specified type that are available to rent.
@@ -13,9 +17,27 @@ public class Company {
 	 * @return number of cars of the specified type that are available to rent
 	 */
 	public int availableCars(Car carType) {
-		int amount;
+		int Small_amount=0;
+		int Large_amount = 0;
+		for (Car car : cars) {
+			if (car instanceof LargeCar) {
+				Large_amount++;
+			}
+			else if (car instanceof SmallCar) {
+				Small_amount++;
+			}
+		}
 		
-		return 0;
+		if (carType.equals("large")) {
+			return Large_amount;
+		}
+		else if(carType.equals("small")){
+			return Small_amount;
+		}
+		else {
+			//此处应丢出一个异常
+			return 0;
+		}
 	}
 	
 	
@@ -23,14 +45,21 @@ public class Company {
 	 * @return list of all the cars currently rented out
 	 */
 	public ArrayList<Car> getRentedCars() {
-		return null;
+		ArrayList<Car> rentedcars = new ArrayList<Car>();
+		cars.forEach(n->{if (n.isRented()) {
+			rentedcars.add(n);
+		}});
+		return rentedcars;
 	}
 	
 	/** Given a person's driving licence, this method returns the car they are currently renting
 	 * @param drivingLicence person's driving licence to find record
 	 * @return car the person are currently renting(if any)
 	 */
-	public Car getCar(String drivingLicence) {
+	public Car getCar(DrivingLicence drivingLicence) {
+		if (record.containsKey(drivingLicence)) {
+			return record.get(drivingLicence);
+		}
 		return null;
 	}
 	
@@ -40,7 +69,7 @@ public class Company {
 	 * @param drivingLicence person's driving licence
 	 * @param typeOfCar  typeOfCar to issue
 	 */
-	public void issueCar(String drivingLicence, String typeOfCar) {
+	public void issueCar(DrivingLicence drivingLicence, String typeOfCar) {
 		
 	}
 	

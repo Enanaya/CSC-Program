@@ -18,7 +18,7 @@ public class DrivingLicence {
 		this.firstname=firstname;
 		this.lastname=lastname;
 		drivingLicence=generateDL(this.birthday, firstname, lastname);
-		System.out.println(drivingLicence);
+//		System.out.println(drivingLicence);
 	}
 	
 	private static final String HYPHEN="-";
@@ -43,9 +43,10 @@ public class DrivingLicence {
 		return dl.toString();
 	}
 	
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		Calendar c=Calendar.getInstance();
 		c.setTime(new Date());
 		DrivingLicence dl=new DrivingLicence(c, "Mark", "Smith");
-	}*/
+		System.out.println(dl.getClass());
+	}
 }
