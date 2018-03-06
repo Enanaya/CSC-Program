@@ -27,6 +27,8 @@ public interface Car {
 	 */
 	boolean isRented();
 	
+	void setStatus(String status);
+	
 	/** method to add a given number of whole Litres to the fuel tank (up to the tank's 
 	 * capacity) and which, after execution, indicates how much fuel was added to the tank 
 	 * (which will be 0 if the car is not rented or its tank is already full)
@@ -41,4 +43,7 @@ public interface Car {
 	 * @return  number of whole Litres of fuel consumed during the journey
 	 */
 	int driveCar(int km);
+	
+	String getType();
+	
 }
