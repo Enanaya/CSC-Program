@@ -9,7 +9,6 @@ import javax.jws.soap.SOAPBinding.Use;
 
 import com.google.common.io.Files;
 
-
 public class IOguava {
 
 	public static void main(String[] args) {

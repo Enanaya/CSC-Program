@@ -1,8 +1,24 @@
 package 一五到一六;
 
-public class FreeAccount extends AbstractAccount {
+public class FreeAccount extends AbstractAccount implements Account{
 
-	
+	@Override
+	public void desopit(int amount) {
+		// TODO Auto-generated method stub
+		balance+=amount;
+	}
+
+	@Override
+	public int getAccountNumber() {
+		// TODO Auto-generated method stub
+		return AccountNumber;
+	}
+
+	@Override
+	public int getBalance() {
+		// TODO Auto-generated method stub
+		return balance;
+	}
 
 	@Override
 	public int withdraw(int amount) {
