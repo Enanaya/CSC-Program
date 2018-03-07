@@ -7,25 +7,35 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
-public class Company {
-	private Map<DriveLicence, Car> record;
+public final class Company {
+	private static Map<DriveLicence, Car> record=new HashMap<DriveLicence, Car>();
 	
 	/**
 	 * store the info of all cars(50 at all) 
 	 */
-	private ArrayList<Car> cars;
+	private static ArrayList<Car> cars=new ArrayList<Car>();
 	
 	private int sc_amount;
 	private int lc_amount;
 	
 	public Company() {
 		// TODO Auto-generated constructor stub
-		sc_amount=20;
-		lc_amount=30;
+		sc_amount=0;
+		lc_amount=0;
 	}
 	
+	public  void addCar(Car c) {
+		cars.add(c);
+		if (c instanceof SmallCar) {
+			sc_amount++;
+		}
+		if (c instanceof LargeCar) {
+			lc_amount++;
+		}
+	}
 	
 	
 	/** This method returns the number of cars of the specified type that are available to rent.
@@ -33,26 +43,17 @@ public class Company {
 	 * @return number of cars of the specified type that are available to rent
 	 */
 	public int availableCars(String carType) {
-		/*int Small_amount=0;
-		int Large_amount = 0;
-		for (Car car : cars) {
-			if (car instanceof LargeCar) {
-				Large_amount++;
-			}
-			else if (car instanceof SmallCar) {
-				Small_amount++;
-			}
-		}*/
 		
 		if (carType.equals("small")) {
-			return lc_amount;
+			return sc_amount;
 		}
 		else if(carType.equals("large")){
-			return sc_amount;
+			return lc_amount;
 		}
 		else {
 			//此处应丢出一个异常
-			return 0;
+			throw new IllegalArgumentException(
+                    "invalid car type: " + carType);
 		}
 	}
 	
@@ -76,8 +77,10 @@ public class Company {
 	public Car getCar(DriveLicence drivingLicence) {
 		if (record.containsKey(drivingLicence)) {
 			return record.get(drivingLicence);
+		}else {
+			throw new IllegalArgumentException(
+                    "no drivelicence record: " + drivingLicence);
 		}
-		return null;
 	}
 	
 	/** Given a person's driving licence and a specification of the type of car required (small
@@ -115,14 +118,15 @@ public class Company {
 				lc_amount--;
 			}
 			else { //处理不能租车的情况
-				System.out.println();
+				throw new IllegalArgumentException(
+                        "can not rent car " );
 			}
 		}
 		for (Car car : cars) {
 			if (car.getType().equals(carType) && !car.isRented()
 					&& car.getCurrentFuel()==car.getMaxCapacityOfFuelTank()) {
+				car.setRented("isrented");
 				record.put(drivingLicence,car);
-				car.setStatus("RENTED");
 				break;
 			}
 		}
@@ -139,6 +143,7 @@ public class Company {
 	public int terminateRental(DriveLicence drivingLicence) {
 		Car car=record.get(drivingLicence);
 		int fuelToAdd=car.getMaxCapacityOfFuelTank()-car.getCurrentFuel();
+		car.setRented("notrented");
 		record.remove(drivingLicence);
 		return fuelToAdd;
 	}

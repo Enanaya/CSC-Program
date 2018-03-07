@@ -25,7 +25,7 @@ public abstract class CarFactory implements Car {
 	/**
 	 * status of car:1.RENTED;2.NOTRENTED
 	 */
-	private String status;
+	private String status=NOTRENTED;
 
 	private static final String RENTED = "isrented";
 
@@ -51,6 +51,10 @@ public abstract class CarFactory implements Car {
 			car = new LargeCar(reg, 60);
 		} else if (carType.equals(SMALL_CAR)) {
 			car = new SmallCar(reg, 49);
+		}else {
+			throw new IllegalArgumentException(
+                    "invalid car type: " + carType);
+
 		}
 		cars.put(reg, car);
 		return car;
@@ -58,20 +62,23 @@ public abstract class CarFactory implements Car {
 
 	private static String regNum_generate() {
 		String res = "";
-		res+=String.valueOf(new Random().nextInt(26));
-		res+=new Random().nextInt(8999)+1000;
+		Random random = new Random(); 
+		int temp = random.nextInt(2) % 2 == 0 ? 65 : 97;  
+		res+=(char)(random.nextInt(26)+temp);
+		res+=random.nextInt(8999)+1000;
 		return res;
 	}
 
 	@Override
-	public void setStatus(String status) {
+	public void setRented(String status) {
 		// TODO Auto-generated method stub
 		if (status == RENTED) {
 			this.status = RENTED;
 		} else if (status == NOTRENTED) {
 			this.status = NOTRENTED;
 		} else {
-			// ¥¶¿Ì“Ï≥£
+			throw new IllegalArgumentException(
+                    "invalid status type: " + status);
 		}
 	}
 
@@ -108,6 +115,9 @@ public abstract class CarFactory implements Car {
 	@Override
 	public int addFuel(int amount) {
 		// TODO Auto-generated method stub
+		if (amount<0) {
+			throw  new IllegalArgumentException("negative amount");
+		}
 		if (amount > CapacityOfFuel) {
 			int _amount = CapacityOfFuel - currentFuel;
 			currentFuel = CapacityOfFuel;

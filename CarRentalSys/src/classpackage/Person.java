@@ -1,28 +1,24 @@
 package classpackage;
 
+import java.util.Date;
+
+
 public class Person {
 
 	private Name name;
-	private int age;
+	private Date birthday;
 
-	public Person(Name name, int age) {
+	public Person(Name name, Date birthday) {
 		if (name.length() == 0)
 			throw new IllegalArgumentException("empty string");
-
-		if (age < 0)
-			throw new IllegalArgumentException("zero age");
-
+		if (birthday.getTime()<0) {
+			throw new IllegalArgumentException("invalid birthday");
+		}
 		this.name = name;
-		this.age = age;
+		this.birthday=birthday;
 	}
 
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
+	
 
 	public boolean equals(Object o) {
 		if (this == o)
@@ -33,7 +29,7 @@ public class Person {
 
 		Person p = (Person) o;
 
-		return age == p.age && name.equals(p.name);
+		return  name.equals(p.name) && birthday==p.birthday;
 	}
 
 	public Name getName() {
@@ -42,6 +38,14 @@ public class Person {
 
 	public void setName(Name name) {
 		this.name = name;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 	

@@ -17,8 +17,12 @@ public class SmallCar extends CarFactory{
 	@Override
 	public int driveCar(int km) {
 		// TODO Auto-generated method stub
+		if (km<0) {
+			throw new IllegalArgumentException("negative distance");
+		}
+		
 		if (isRented() && getCurrentFuel()>0) {
-			int fuelUse=km/fuelConsume;
+			int fuelUse=(int) Math.ceil((double)km/fuelConsume);
 			return fuelUse<getCurrentFuel()?fuelUse:getCurrentFuel();
 		}
 		return -1;

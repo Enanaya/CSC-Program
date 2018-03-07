@@ -19,13 +19,16 @@ package classpackage;
 	@Override
 	public int driveCar(int km) {
 		// TODO Auto-generated method stub
+		if (km<0) {
+			throw new IllegalArgumentException("negative distance");
+		}
 		if (isRented() && getCurrentFuel()>0) {
 			if (km<50) {
-				int fuelUse=km/fuelConsumeIn50k;
+				int fuelUse=(int) Math.ceil((double)km/fuelConsume);
 				return fuelUse<getCurrentFuel()?fuelUse:getCurrentFuel();
 			}
 			else {
-				int fuelUse=(km-50)/fuelConsume +50*fuelConsumeIn50k;
+				int fuelUse=(int) Math.ceil((((double)km)-50)/fuelConsume) +50*fuelConsumeIn50k;
 				return fuelUse<getCurrentFuel()?fuelUse:getCurrentFuel();
 			}
 		}

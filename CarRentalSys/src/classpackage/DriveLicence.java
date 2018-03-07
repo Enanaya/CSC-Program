@@ -13,11 +13,16 @@ public class DriveLicence {
 	public DriveLicence() {
 	}
 
-	public DriveLicence(Person p, Date birth,  Date issueDate) {
+	public DriveLicence(Person p, Date issueDate) {
+		if (p.getName().length() == 0)
+			throw new IllegalArgumentException("empty string");
+		if (p.getBirthday().getTime()<0) {
+			throw new IllegalArgumentException("invalid birthday");
+		}
 		this.name = p.getName();
-		this.birthday = birth;
+		this.birthday = p.getBirthday();
 		this.issueDate = issueDate;
-		this.ln = new LicenceNum(p,issueDate);
+		this.ln = new LicenceNum(p, issueDate);
 
 		if (p != null && birthday != null && ln != null && issueDate != null) {
 			isFull = true;

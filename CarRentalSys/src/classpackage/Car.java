@@ -27,7 +27,7 @@ public interface Car {
 	 */
 	boolean isRented();
 	
-	void setStatus(String status);
+	void setRented(String status);
 	
 	/** method to add a given number of whole Litres to the fuel tank (up to the tank's 
 	 * capacity) and which, after execution, indicates how much fuel was added to the tank 
