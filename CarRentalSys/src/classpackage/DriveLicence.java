@@ -7,14 +7,14 @@ public class DriveLicence {
 	private Name name;
 	private Date birthday;
 	/**
-	 *  unique licence number
+	 * unique licence number
 	 */
 	private LicenceNum ln;
-	private Date issueDate; 
+	private Date issueDate;
 	/**
 	 * judge whther this licence is full to drive car
 	 */
-	private boolean isFull; 
+	private boolean isFull;
 
 	public DriveLicence() {
 	}
@@ -22,7 +22,7 @@ public class DriveLicence {
 	public DriveLicence(Person p, Date issueDate) {
 		if (p.getName().length() == 0)
 			throw new IllegalArgumentException("empty string");
-		if (p.getBirthday().getTime()<0) {
+		if (p.getBirthday().getTime() < 0) {
 			throw new IllegalArgumentException("invalid birthday");
 		}
 		this.name = p.getName();

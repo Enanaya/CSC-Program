@@ -1,4 +1,4 @@
-package ·ÏÆú;
+package test;
 
 public class Assertions {
     private Assertions() { }

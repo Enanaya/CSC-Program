@@ -47,6 +47,12 @@ public interface Car {
 	 */
 	int driveCar(int km);
 	
+	/** after drive car,reduce fuel
+	 * @param L the amount of fuel need to reduce
+	 */
+	void fuelConsume(int L);
+	
+	
 	/** method to get the type of car
 	 * @return the type of car :small or large
 	 */

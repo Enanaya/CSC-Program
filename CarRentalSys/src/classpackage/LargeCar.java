@@ -1,38 +1,43 @@
 package classpackage;
 
- final class LargeCar extends CarFactory{
-	
+final class LargeCar extends CarFactory {
+
 	/**
-     * large car : 60 
-     */
-    private final int CapacityOfFuel=60;
-    
-    private final static int fuelConsumeIn50k=10;
-    
-    private final static int fuelConsume=15;
-	
-	public LargeCar(String reg_number,int CapacityOfFuel) {
+	 * large car : 60
+	 */
+	private final int CapacityOfFuel = 60;
+
+	private final static int fuelConsumeIn50k = 10;
+
+	private final static int fuelConsume = 15;
+
+	public LargeCar(String reg_number, int CapacityOfFuel) {
 		// TODO Auto-generated constructor stub
-		super(reg_number,CapacityOfFuel);
+		super(reg_number, CapacityOfFuel);
 	}
 
 	@Override
 	public int driveCar(int km) {
 		// TODO Auto-generated method stub
-		if (km<0) {
+		if (km < 0) {
 			throw new IllegalArgumentException("negative distance");
 		}
-		if (isRented() && getCurrentFuel()>0) {
-			if (km<50) {
-				int fuelUse=(int) Math.ceil((double)km/fuelConsume);
-				return fuelUse<getCurrentFuel()?fuelUse:getCurrentFuel();
+		int fuelUse = 0;
+		if (isRented() && getCurrentFuel() > 0) {
+			if (km < 50) {
+				fuelUse = (int) Math.ceil((double) km / fuelConsume);
+			} else {
+				fuelUse = (int) Math.ceil((((double) km) - 50) / fuelConsume) + 50 * fuelConsumeIn50k;
 			}
-			else {
-				int fuelUse=(int) Math.ceil((((double)km)-50)/fuelConsume) +50*fuelConsumeIn50k;
-				return fuelUse<getCurrentFuel()?fuelUse:getCurrentFuel();
+
+			if (fuelUse < getCurrentFuel()) {
+				fuelConsume(fuelUse);
+			} else {
+				fuelUse = getCurrentFuel();
+				fuelConsume(fuelUse);
 			}
 		}
-		return -1;
+		return fuelUse;
 	}
 
 	@Override
