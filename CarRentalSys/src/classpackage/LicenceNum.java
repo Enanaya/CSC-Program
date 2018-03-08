@@ -39,6 +39,4 @@ public class LicenceNum  extends DriveLicence{
 		return ln;
 	}
 	
-	
-	
 }

@@ -17,18 +17,13 @@ public class Person {
 		this.name = name;
 		this.birthday=birthday;
 	}
-
 	
-
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
-
 		if (!(o instanceof Person))
 			return false;
-
 		Person p = (Person) o;
-
 		return  name.equals(p.name) && birthday==p.birthday;
 	}
 
@@ -47,6 +42,5 @@ public class Person {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-
 	
 }

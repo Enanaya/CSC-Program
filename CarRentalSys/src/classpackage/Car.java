@@ -27,6 +27,9 @@ public interface Car {
 	 */
 	boolean isRented();
 	
+	/** after issue or terminate the contract,change the status of car
+	 * @param status  1.isrented  2.notrented
+	 */
 	void setRented(String status);
 	
 	/** method to add a given number of whole Litres to the fuel tank (up to the tank's 
@@ -44,6 +47,9 @@ public interface Car {
 	 */
 	int driveCar(int km);
 	
+	/** method to get the type of car
+	 * @return the type of car :small or large
+	 */
 	String getType();
 	
 }

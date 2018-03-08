@@ -51,7 +51,6 @@ public final class Company {
 			return lc_amount;
 		}
 		else {
-			//此处应丢出一个异常
 			throw new IllegalArgumentException(
                     "invalid car type: " + carType);
 		}
@@ -117,7 +116,7 @@ public final class Company {
 			else if (age>=25 && carType.equals("large") && LicTime >= 5) {
 				lc_amount--;
 			}
-			else { //处理不能租车的情况
+			else { 
 				throw new IllegalArgumentException(
                         "can not rent car " );
 			}

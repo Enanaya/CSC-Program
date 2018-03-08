@@ -6,9 +6,15 @@ public class DriveLicence {
 
 	private Name name;
 	private Date birthday;
+	/**
+	 *  unique licence number
+	 */
 	private LicenceNum ln;
-	private Date issueDate; // 发证日期
-	private boolean isFull; // 是否完整
+	private Date issueDate; 
+	/**
+	 * judge whther this licence is full to drive car
+	 */
+	private boolean isFull; 
 
 	public DriveLicence() {
 	}

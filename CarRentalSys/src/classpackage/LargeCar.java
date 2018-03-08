@@ -32,8 +32,6 @@ package classpackage;
 				return fuelUse<getCurrentFuel()?fuelUse:getCurrentFuel();
 			}
 		}
-		
-		
 		return -1;
 	}
 
