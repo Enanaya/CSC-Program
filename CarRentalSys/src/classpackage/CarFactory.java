@@ -39,6 +39,7 @@ public abstract class CarFactory implements Car {
 		// TODO Auto-generated constructor stub
 		this.reg_number = reg_number;
 		this.CapacityOfFuel = CapacityOfFuel;
+		currentFuel=CapacityOfFuel;
 	}
 
 	public static Car getInstance(String carType) {
@@ -118,10 +119,13 @@ public abstract class CarFactory implements Car {
 		if (amount<0) {
 			throw  new IllegalArgumentException("negative amount");
 		}
-		if (amount > CapacityOfFuel) {
-			int _amount = CapacityOfFuel - currentFuel;
+		if (this.isRented() || this.currentFuel==this.CapacityOfFuel) {
+			return 0;
+		}
+		int rest_amount = CapacityOfFuel - currentFuel;
+		if (amount > rest_amount) {
 			currentFuel = CapacityOfFuel;
-			return _amount;
+			return rest_amount;
 		} else {
 			currentFuel += amount;
 			return amount;

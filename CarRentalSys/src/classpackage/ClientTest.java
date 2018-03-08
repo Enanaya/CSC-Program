@@ -13,9 +13,9 @@ public class ClientTest {
 
 	public static void main(String[] args) {
 		final ClientTest ct = new ClientTest();
-		// ct.testCar();
-//		ct.testDL();
-		 ct.testSmallCar();
+		ct.testCar();
+		ct.testDL();
+		ct.testSmallCar();
 	}
 
 	private void testCar() {
@@ -78,10 +78,9 @@ public class ClientTest {
 			Assertions.assertExpectedThrowable(IllegalArgumentException.class, t);
 		}
 
-		// test add fuel until full
+		// test fuel 
 		try {
 			final Car c1 = CarFactory.getInstance("large");
-			c1.addFuel(10000);
 			Assertions.assertEquals(c1.getMaxCapacityOfFuelTank(), c1.getCurrentFuel());
 		} catch (Throwable t) {
 			Assertions.assertExpectedThrowable(IllegalArgumentException.class, t);
@@ -135,62 +134,62 @@ public class ClientTest {
 
 		// test right drive
 		try {
-			Company company=new Company();
-			
+			Company company = new Company();
+
 			Name name = new Name("Peter", "Smith");
 			Calendar calendar1 = Calendar.getInstance();
 			calendar1.set(1974, 3, 22);
 			Calendar calendar2 = Calendar.getInstance();
 			calendar2.set(1994, 3, 22);
 			final Person p = new Person(name, calendar1.getTime());
-			final DriveLicence dl = new DriveLicence(p,calendar2.getTime()) ;
-			
+			final DriveLicence dl = new DriveLicence(p, calendar2.getTime());
+
 			final Car c1 = CarFactory.getInstance("small");
-			c1.addFuel(49);
+//			c1.addFuel(49);
 			company.addCar(c1);
-//			System.out.println(company.availableCars("small"));
+			// System.out.println(company.availableCars("small"));
 			company.issueCar(dl, "small");
-//			System.out.println(company.getCar(dl).getRegistrationNumber()); 
-//			System.out.println(c1.addFuel(20));
+			// System.out.println(company.getCar(dl).getRegistrationNumber());
+			// System.out.println(c1.addFuel(20));
 			c1.addFuel(20);
-//			System.out.println(c1.driveCar(5));
+			// System.out.println(c1.driveCar(5));
 			c1.driveCar(5);
 
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 
-		//test null param during issue car
+		// test null param during issue car
 		try {
-			Company company=new Company();
+			Company company = new Company();
 			Name name = new Name("Peter", "Smith");
 			Calendar calendar1 = Calendar.getInstance();
 			calendar1.set(1974, 3, 22);
 			Calendar calendar2 = Calendar.getInstance();
 			calendar2.set(1994, 3, 22);
 			final Person p = new Person(name, calendar1.getTime());
-			final DriveLicence dl = new DriveLicence(p,calendar2.getTime()) ;
-			
+			final DriveLicence dl = new DriveLicence(p, calendar2.getTime());
+
 			final Car c1 = CarFactory.getInstance("small");
-			c1.addFuel(49);
+//			c1.addFuel(49);
 			company.addCar(c1);
 			company.issueCar(dl, "");
 
 		} catch (Throwable t) {
 			Assertions.assertExpectedThrowable(IllegalArgumentException.class, t);
 		}
-		
-		//test negative amount during add fuel
+
+		// test negative amount during adding fuel
 		try {
-			Company company=new Company();
+			Company company = new Company();
 			Name name = new Name("Peter", "Smith");
 			Calendar calendar1 = Calendar.getInstance();
 			calendar1.set(1974, 3, 22);
 			Calendar calendar2 = Calendar.getInstance();
 			calendar2.set(1994, 3, 22);
 			final Person p = new Person(name, calendar1.getTime());
-			final DriveLicence dl = new DriveLicence(p,calendar2.getTime()) ;
-			
+			final DriveLicence dl = new DriveLicence(p, calendar2.getTime());
+
 			final Car c1 = CarFactory.getInstance("small");
 			company.addCar(c1);
 			company.issueCar(dl, "small");
@@ -198,28 +197,27 @@ public class ClientTest {
 		} catch (Throwable t) {
 			Assertions.assertExpectedThrowable(IllegalArgumentException.class, t);
 		}
-		
-		//test negative amount during add fuel
-				try {
-					Company company=new Company();
-					Name name = new Name("Peter", "Smith");
-					Calendar calendar1 = Calendar.getInstance();
-					calendar1.set(1974, 3, 22);
-					Calendar calendar2 = Calendar.getInstance();
-					calendar2.set(1994, 3, 22);
-					final Person p = new Person(name, calendar1.getTime());
-					final DriveLicence dl = new DriveLicence(p,calendar2.getTime()) ;
-					
-					final Car c1 = CarFactory.getInstance("small");
-					c1.addFuel(49);
-					company.addCar(c1);
-					company.issueCar(dl, "small");
-					c1.driveCar(-20);
-				} catch (Throwable t) {
-					Assertions.assertExpectedThrowable(IllegalArgumentException.class, t);
-				}
-		
-		
+
+		// test negative amount during driving car
+		try {
+			Company company = new Company();
+			Name name = new Name("Peter", "Smith");
+			Calendar calendar1 = Calendar.getInstance();
+			calendar1.set(1974, 3, 22);
+			Calendar calendar2 = Calendar.getInstance();
+			calendar2.set(1994, 3, 22);
+			final Person p = new Person(name, calendar1.getTime());
+			final DriveLicence dl = new DriveLicence(p, calendar2.getTime());
+
+			final Car c1 = CarFactory.getInstance("small");
+//			c1.addFuel(49);
+			company.addCar(c1);
+			company.issueCar(dl, "small");
+			c1.driveCar(-20);
+		} catch (Throwable t) {
+			Assertions.assertExpectedThrowable(IllegalArgumentException.class, t);
+		}
+
 		System.out.println("success!");
 	}
 }
