@@ -4,6 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * a class as object factor to create car
+ * @author Z.Liang
+ *
+ */
 public abstract class CarFactory implements Car {
 
 	/**
@@ -42,6 +47,10 @@ public abstract class CarFactory implements Car {
 		currentFuel = CapacityOfFuel;
 	}
 
+	/** method to create new car or if the amount of car is full,return exist car
+	 * @param carType  the type of car to create
+	 * @return new car with unique registration number
+	 */
 	public static Car getInstance(String carType) {
 		String reg = regNum_generate();
 		Car car = cars.get(reg);
@@ -49,8 +58,26 @@ public abstract class CarFactory implements Car {
 			return car;
 		}
 		if (carType.equals(LARGE_CAR)) {
+			int count=0;
+			for (Car car2 : cars.values()) {
+				if (car2.getType().equals(LARGE_CAR)) {
+					count++;
+				}
+			}
+			if (count>=20) {
+				return null;
+			}
 			car = new LargeCar(reg, 60);
 		} else if (carType.equals(SMALL_CAR)) {
+			int count=0;
+			for (Car car2 : cars.values()) {
+				if (car2.getType().equals(LARGE_CAR)) {
+					count++;
+				}
+			}
+			if (count>=30) {
+				return null;
+			}
 			car = new SmallCar(reg, 49);
 		} else {
 			throw new IllegalArgumentException("invalid car type: " + carType);

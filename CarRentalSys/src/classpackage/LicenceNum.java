@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
+/**
+ * a class to serve as licence number in drivelicence
+ * extends individual info to create licence number
+ * @author Z.Liang
+ *
+ */
 public class LicenceNum extends DriveLicence {
 
 	private String name;
