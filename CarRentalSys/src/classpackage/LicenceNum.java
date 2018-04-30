@@ -6,12 +6,15 @@ import java.util.Date;
 import java.util.Random;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * a class to serve as licence number in drivelicence
  * extends individual info to create licence number
  * @author Z.Liang
  *
  */
+=======
+>>>>>>> parent of 74aaa77... 初始化
 public class LicenceNum extends DriveLicence {
 =======
 public class LicenceNum  extends DriveLicence{
