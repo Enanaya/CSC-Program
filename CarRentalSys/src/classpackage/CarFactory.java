@@ -19,18 +19,18 @@ public abstract class CarFactory implements Car {
 	/**
 	 * Large car type.
 	 */
-	private static final String LARGE_CAR = "large";
+	public static final String LARGE_CAR = "large";
 	/**
 	 * Samll car type.
 	 */
-	private static final String SMALL_CAR = "small";
+	public static final String SMALL_CAR = "small";
 
 	private int currentFuel;
 
 	/**
 	 * status of car:1.RENTED;2.NOTRENTED
 	 */
-	private String status = NOTRENTED;
+	private String status=NOTRENTED;
 
 	private static final String RENTED = "isrented";
 
@@ -44,7 +44,7 @@ public abstract class CarFactory implements Car {
 		// TODO Auto-generated constructor stub
 		this.reg_number = reg_number;
 		this.CapacityOfFuel = CapacityOfFuel;
-		currentFuel = CapacityOfFuel;
+		currentFuel=CapacityOfFuel;
 	}
 
 	/** method to create new car or if the amount of car is full,return exist car
@@ -52,7 +52,7 @@ public abstract class CarFactory implements Car {
 	 * @return new car with unique registration number
 	 */
 	public static Car getInstance(String carType) {
-		String reg = regNum_generate();
+		String reg=regNum_generate();
 		Car car = cars.get(reg);
 		if (car != null) {
 			return car;
@@ -79,23 +79,21 @@ public abstract class CarFactory implements Car {
 				return null;
 			}
 			car = new SmallCar(reg, 49);
-		} else {
-			throw new IllegalArgumentException("invalid car type: " + carType);
+		}else {
+			throw new IllegalArgumentException(
+                    "invalid car type: " + carType);
 
 		}
 		cars.put(reg, car);
 		return car;
 	}
 
-	/** method to generate the unique number for a car
-	 * @return car's registration number
-	 */
 	private static String regNum_generate() {
 		String res = "";
-		Random random = new Random();
-		int temp = random.nextInt(2) % 2 == 0 ? 65 : 97;
-		res += (char) (random.nextInt(26) + temp);
-		res += random.nextInt(8999) + 1000;
+		Random random = new Random(); 
+		int temp = random.nextInt(2) % 2 == 0 ? 65 : 97;  
+		res+=(char)(random.nextInt(26)+temp);
+		res+=random.nextInt(8999)+1000;
 		return res;
 	}
 
@@ -107,7 +105,8 @@ public abstract class CarFactory implements Car {
 		} else if (status == NOTRENTED) {
 			this.status = NOTRENTED;
 		} else {
-			throw new IllegalArgumentException("invalid status type: " + status);
+			throw new IllegalArgumentException(
+                    "invalid status type: " + status);
 		}
 	}
 
@@ -144,10 +143,10 @@ public abstract class CarFactory implements Car {
 	@Override
 	public int addFuel(int amount) {
 		// TODO Auto-generated method stub
-		if (amount < 0) {
-			throw new IllegalArgumentException("negative amount");
+		if (amount<0) {
+			throw  new IllegalArgumentException("negative amount");
 		}
-		if (!this.isRented() || isFullFuel()) {
+		if (this.isRented() || this.currentFuel==this.CapacityOfFuel) {
 			return 0;
 		}
 		int rest_amount = CapacityOfFuel - currentFuel;
@@ -158,12 +157,6 @@ public abstract class CarFactory implements Car {
 			currentFuel += amount;
 			return amount;
 		}
-	}
-
-	@Override
-	public void fuelConsume(int L) {
-		// TODO Auto-generated method stub
-		currentFuel -= L;
 	}
 
 }

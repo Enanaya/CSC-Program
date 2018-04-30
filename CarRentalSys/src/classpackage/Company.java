@@ -27,9 +27,6 @@ public final class Company {
 		lc_amount=0;
 	}
 	
-	/** while create a new car,put it's info into company
-	 * @param c a new car to put into company
-	 */
 	public  void addCar(Car c) {
 		cars.add(c);
 		if (c instanceof SmallCar) {
@@ -64,7 +61,12 @@ public final class Company {
 	 * @return list of all the cars currently rented out
 	 */
 	public ArrayList<Car> getRentedCars() {
+		/*ArrayList<Car> rentedcars = new ArrayList<Car>();
+		cars.forEach(n->{if (n.isRented()) {
+			rentedcars.add(n);
+		}});*/
 		return  new ArrayList<Car>(record.values());
+//		return rentedcars;
 	}
 	
 	/** Given a person's driving licence, this method returns the car they are currently renting
@@ -84,9 +86,17 @@ public final class Company {
 	 * or large), this method determines whether the person is eligible to rent a car of the
 	 * specified type and, if there is a car available, issues a car of the specified type.
 	 * @param drivingLicence person's driving licence
-	 * @param carType  typeOfCar to issue
+	 * @param typeOfCar  typeOfCar to issue
 	 */
 	public void issueCar(DriveLicence drivingLicence, String carType) {
+		/*LocalDate today=LocalDate.now();
+		Instant instant = drivingLicence.getBirthday().toInstant();
+        ZoneId zoneId = ZoneId.systemDefault();
+        
+        LocalDate birthday = instant.atZone(zoneId).toLocalDate();
+		Period p=Period.between(birthday,today);
+		int age=p.getYears(); //age of licence holder
+*/		
 		
 		if (record.containsKey(drivingLicence)) {
 			System.out.println(); //one person can only rent one car
